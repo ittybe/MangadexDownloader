@@ -4,6 +4,11 @@
         <name>MangadexDownloader</name>
     </assembly>
     <members>
+        <member name="T:MangadexDownloader.ContentInfo.IChapterInfo">
+            <summary>
+            Interface for class ChapterInfo
+            </summary>
+        </member>
         <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.Id">
             <summary>
             chapter id
@@ -24,9 +29,9 @@
             chapter number
             </summary>
         </member>
-        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.PageCount">
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.PageArray">
             <summary>
-            page count for this chapter
+            JArray with all pages in it
             </summary>
         </member>
         <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.LangCode">

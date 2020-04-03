@@ -19,7 +19,7 @@ namespace MangadexDownloader.Parsing
             var element = document.QuerySelector("pre");
             return element.TextContent;
         }
-        public IChapterInfo ConvertJson(string json)
+        public ChapterInfo ConvertJson(string json)
         {
             ChapterInfo chapterInfo = JsonConvert.DeserializeObject<ChapterInfo>(json);
             return chapterInfo;

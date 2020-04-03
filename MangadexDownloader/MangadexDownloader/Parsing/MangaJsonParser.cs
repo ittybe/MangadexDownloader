@@ -21,7 +21,7 @@ namespace MangadexDownloader.Parsing
 
         public IMangaInfo ConvertJson(string json) 
         {
-            IMangaInfo mangaInfo = JsonConvert.DeserializeObject<IMangaInfo>(json);
+            MangaInfo mangaInfo = JsonConvert.DeserializeObject<MangaInfo>(json);
             return mangaInfo;
         }
     }
