@@ -12,20 +12,26 @@ namespace MangadexDownloader.ContentInfo
     public class ChapterInfo : IChapterInfo
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public int Id { get; }
+        
         
         [JsonProperty("manga_id")]
-        public int MangaId { get; set; }
+        public int MangaId { get; }
 
+        
         [JsonProperty("volume")]
-        public string Volume { get; set; }
+        public string Volume { get; }
+        
         
         [JsonProperty("chapter")]
-        public string Chapter { get; set; }
+        public string Chapter { get; }
         
-        public int PageCount { get; set; }
+        
+        [JsonProperty("page_array")]
+        public JArray PageArray { get; }
+
 
         [JsonProperty("lang_code")]
-        public string LangCode { get; set; }
+        public string LangCode { get; }
     }
 }

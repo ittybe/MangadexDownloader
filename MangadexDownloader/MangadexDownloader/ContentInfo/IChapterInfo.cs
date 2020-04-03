@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,7 +13,7 @@ namespace MangadexDownloader.ContentInfo
         /// <summary>
         /// chapter id
         /// </summary>
-        int Id { get; set; }
+        int Id { get; }
         
         /// <summary>
         /// manga id
@@ -30,9 +31,9 @@ namespace MangadexDownloader.ContentInfo
         string Chapter { get; }
 
         /// <summary>
-        /// page count for this chapter
+        /// JArray with all pages in it
         /// </summary>
-        int PageCount { get; }
+        JArray PageArray { get; }
 
         /// <summary>
         /// language code
