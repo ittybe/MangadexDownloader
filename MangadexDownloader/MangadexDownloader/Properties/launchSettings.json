@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "MangadexDownloader": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\Lenovo\\source\\repos\\DebuggingDLL\\DebuggingDLL\\bin\\Debug\\netcoreapp3.1\\DebuggingDLL.exe",
+      "nativeDebugging": false
+    }
+  }
+}

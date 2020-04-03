@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MangadexDownloader</name>
+    </assembly>
+    <members>
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.Id">
+            <summary>
+            chapter id
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.MangaId">
+            <summary>
+            manga id
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.Volume">
+            <summary>
+            volume number
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.Chapter">
+            <summary>
+            chapter number
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.PageCount">
+            <summary>
+            page count for this chapter
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.LangCode">
+            <summary>
+            language code
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IMangaInfo.CoverUrl">
+            <summary>
+            url to cover of manga
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IMangaInfo.Title">
+            <summary>
+            title of manga
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IMangaInfo.Chapters">
+            <summary>
+            chapters info
+            </summary>
+        </member>
+        <member name="T:MangadexDownloader.Parsing.IJsonParser">
+            <summary>
+            interface for json parsing
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.IJsonParser.GetJson(System.Int32)">
+            <summary>
+            get json method
+            </summary>
+            <param name="id">id for manga or chapter</param>
+            <returns>returns json string</returns>
+        </member>
+    </members>
+</doc>
