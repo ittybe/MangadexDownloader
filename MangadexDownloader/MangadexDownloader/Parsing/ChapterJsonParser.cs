@@ -22,9 +22,6 @@ namespace MangadexDownloader.Parsing
         public IChapterInfo ConvertJson(string json)
         {
             ChapterInfo chapterInfo = JsonConvert.DeserializeObject<ChapterInfo>(json);
-            JObject jObject = JObject.Parse(json);
-            JArray jArray = new JArray();
-
             return chapterInfo;
         }
     }

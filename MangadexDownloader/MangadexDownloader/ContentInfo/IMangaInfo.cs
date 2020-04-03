@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,10 +16,10 @@ namespace MangadexDownloader.ContentInfo
         /// title of manga
         /// </summary>
         string Title { get; }
-        
+
         /// <summary>
         /// chapters info
         /// </summary>
-        List<IChapterInfo> Chapters { get; }
+        IEnumerable<JToken> Chapters { get; }
     }
 }
