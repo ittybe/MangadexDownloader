@@ -28,16 +28,24 @@ namespace MangadexDownloader.ContentInfo
         [JsonProperty("chapter")]
         public string Chapter { get; private set; }
         
+        
         [JsonProperty("page_array")]
         public JArray PageArray { get; private set; }
 
+        
         [JsonProperty("lang_code")]
         public string LangCode { get; private set; }
 
+        
         [JsonProperty("hash")]
         public string Hash { get; private set; }
         
+     
         [JsonProperty("server")]
         public string ServerUrl { get; private set; }
+
+
+        [JsonProperty("lang_name")]
+        public string LangName { get; private set; }
     }
 }

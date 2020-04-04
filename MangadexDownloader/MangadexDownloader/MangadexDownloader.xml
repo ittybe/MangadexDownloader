@@ -39,6 +39,26 @@
             language code
             </summary>
         </member>
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.Hash">
+            <summary>
+            Chapter's hash for ServerUrl
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.ServerUrl">
+            <summary>
+            Server url for pages
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.LangName">
+            <summary>
+            language name
+            </summary>
+        </member>
+        <member name="T:MangadexDownloader.ContentInfo.IMangaInfo">
+            <summary>
+            interface MangaInfo
+            </summary>
+        </member>
         <member name="P:MangadexDownloader.ContentInfo.IMangaInfo.CoverUrl">
             <summary>
             url to cover of manga
@@ -52,6 +72,46 @@
         <member name="P:MangadexDownloader.ContentInfo.IMangaInfo.Chapters">
             <summary>
             chapters info
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.CoverUrl">
+            <summary>
+            manga's cover url
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.Title">
+            <summary>
+            title of manga
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.Chapters">
+            <summary>
+            Chapters in manga
+            </summary>
+        </member>
+        <member name="T:MangadexDownloader.Parsing.ContentParsing.IChapterParser">
+            <summary>
+            interface for chapter parser
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.IChapterParser.ChapterInfo">
+            <summary>
+            Chapter info for parsing
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.IChapterParser.Pattern">
+            <summary>
+            pattern for naming every page, regular expression
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.IChapterParser.Dir">
+            <summary>
+            dir for pages
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.IChapterParser.Parse">
+            <summary>
+            parse pages into directory
             </summary>
         </member>
         <member name="M:MangadexDownloader.Parsing.JsonParsing.IChapterJsonParser.ConvertJson(System.String)">
