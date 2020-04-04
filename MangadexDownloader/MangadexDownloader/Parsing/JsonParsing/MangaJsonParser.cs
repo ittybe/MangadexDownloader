@@ -5,7 +5,7 @@ using System.Text;
 using MangadexDownloader.ContentInfo;
 using Newtonsoft.Json;
 
-namespace MangadexDownloader.Parsing
+namespace MangadexDownloader.Parsing.JsonParsing
 {
     public class MangaJsonParser : IMangaJsonParser
     {

@@ -6,7 +6,7 @@ using MangadexDownloader.ContentInfo;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MangadexDownloader.Parsing
+namespace MangadexDownloader.Parsing.JsonParsing
 {
     public class ChapterJsonParser : IChapterJsonParser
     {

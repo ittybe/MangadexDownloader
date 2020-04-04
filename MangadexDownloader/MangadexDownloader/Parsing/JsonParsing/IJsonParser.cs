@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MangadexDownloader.Parsing
+namespace MangadexDownloader.Parsing.JsonParsing
 {
     /// <summary>
     /// interface for json parsing
