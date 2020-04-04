@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MangadexDownloader.ContentInfo
 {
+    /// <summary>
+    /// interface MangaInfo
+    /// </summary>
     public interface IMangaInfo
     {
         /// <summary>
@@ -20,6 +23,6 @@ namespace MangadexDownloader.ContentInfo
         /// <summary>
         /// chapters info
         /// </summary>
-        IEnumerable<JToken> Chapters { get; }
+        JObject Chapters { get; }
     }
 }

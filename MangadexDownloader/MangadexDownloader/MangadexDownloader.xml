@@ -54,17 +54,45 @@
             chapters info
             </summary>
         </member>
-        <member name="T:MangadexDownloader.Parsing.IJsonParser">
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.IChapterJsonParser.ConvertJson(System.String)">
+            <summary>
+            convert json string to ChapterInfo instance
+            </summary>
+            <param name="json"></param>
+            <returns>ChapterInfo instance</returns>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.IChapterJsonParser.GetChapterInfo(System.Int32)">
+            <summary>
+            convert chapter's id into ChapterInfo instance
+            </summary>
+            <param name="id">chapter's id</param>
+            <returns>ChapterInfo instance</returns>
+        </member>
+        <member name="T:MangadexDownloader.Parsing.JsonParsing.IJsonParser">
             <summary>
             interface for json parsing
             </summary>
         </member>
-        <member name="M:MangadexDownloader.Parsing.IJsonParser.GetJson(System.Int32)">
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.IJsonParser.GetJson(System.Int32)">
             <summary>
             get json method
             </summary>
             <param name="id">id for manga or chapter</param>
             <returns>returns json string</returns>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.IMangaJsonParser.ConvertJson(System.String)">
+            <summary>
+            convert json string to ChapterInfo instance
+            </summary>
+            <param name="json"></param>
+            <returns>ChapterInfo instance</returns>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.IMangaJsonParser.GetMangaInfo(System.Int32)">
+            <summary>
+            convert chapter's id into ChapterInfo instance
+            </summary>
+            <param name="id">chapter's id</param>
+            <returns>ChapterInfo instance</returns>
         </member>
     </members>
 </doc>
