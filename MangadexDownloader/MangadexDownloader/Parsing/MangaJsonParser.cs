@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace MangadexDownloader.Parsing
 {
-    public class MangaJsonParser : IJsonParser
+    public class MangaJsonParser : IMangaJsonParser
     {
         public string GetJson(int id)
         {
@@ -18,11 +18,17 @@ namespace MangadexDownloader.Parsing
             var element = document.QuerySelector("pre");
             return element.TextContent;
         }
-
-        public IMangaInfo ConvertJson(string json) 
+        
+        public MangaInfo ConvertJson(string json)
         {
             MangaInfo mangaInfo = JsonConvert.DeserializeObject<MangaInfo>(json);
             return mangaInfo;
+        }
+
+        public MangaInfo GetMangaInfo(int id)
+        {
+            string json = GetJson(id);
+            return ConvertJson(json);
         }
     }
 }

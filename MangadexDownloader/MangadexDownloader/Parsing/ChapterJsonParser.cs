@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace MangadexDownloader.Parsing
 {
-    public class ChapterJsonParser : IJsonParser
+    public class ChapterJsonParser : IChapterJsonParser
     {
         public string GetJson(int id)
         {
@@ -23,6 +23,11 @@ namespace MangadexDownloader.Parsing
         {
             ChapterInfo chapterInfo = JsonConvert.DeserializeObject<ChapterInfo>(json);
             return chapterInfo;
+        }
+        public ChapterInfo GetChapterInfo(int id) 
+        {
+            string json = GetJson(id);
+            return ConvertJson(json);
         }
     }
 }

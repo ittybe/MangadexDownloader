@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MangadexDownloader.ContentInfo
 {
-    class MangaInfo : IMangaInfo
+    public class MangaInfo : IMangaInfo
     {
         [JsonProperty("cover_url")]
         public string CoverUrl { get; private set; }
