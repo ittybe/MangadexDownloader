@@ -31,8 +31,13 @@ namespace MangadexDownloader.ContentInfo
         [JsonProperty("page_array")]
         public JArray PageArray { get; private set; }
 
-
         [JsonProperty("lang_code")]
         public string LangCode { get; private set; }
+
+        [JsonProperty("hash")]
+        public string Hash { get; private set; }
+        
+        [JsonProperty("server")]
+        public string ServerUrl { get; private set; }
     }
 }

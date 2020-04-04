@@ -39,5 +39,15 @@ namespace MangadexDownloader.ContentInfo
         /// language code
         /// </summary>
         string LangCode { get; }
+
+        /// <summary>
+        /// Chapter's hash for ServerUrl
+        /// </summary>
+        string Hash { get; }
+        
+        /// <summary>
+        /// Server url for pages
+        /// </summary>
+        string ServerUrl { get; }
     }
 }
