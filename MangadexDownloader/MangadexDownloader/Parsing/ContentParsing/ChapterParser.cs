@@ -10,33 +10,30 @@ namespace MangadexDownloader.Parsing.ContentParsing
 {
     public class ChapterParser : IChapterParser
     {
-        public IChapterInfo ChapterInfo { get; set; }
-
         public string Pattern { get; } = @"[0-9\.]+_[0-9\.]+_[0-9.]+.\S+";
 
         public DirectoryInfo Dir { get; set; }
 
-        public ChapterParser(IChapterInfo chapterInfo, DirectoryInfo dir) 
+        public ChapterParser(DirectoryInfo dir) 
         {
-            ChapterInfo = chapterInfo;
             Dir = dir;
         }
 
-        public void Parse()
+        public void Parse(IChapterInfo chapterInfo)
         {
             int pageNumber = 1;
-            foreach (var page in ChapterInfo.PageArray) 
+            foreach (var page in chapterInfo.PageArray) 
             {
                 // page's names have string type
                 string pageName = page.ToObject<string>();
                 // local page name and full path to page
                 // VOLUMENUMBER_CHAPTERNUMBER_PAGENUMBER
-                string localPageName = $"{ChapterInfo.Volume}_{ChapterInfo.Chapter}_{pageNumber++}";
+                string localPageName = $"{chapterInfo.Volume}_{chapterInfo.Chapter}_{pageNumber++}";
                 string pageExtension = Path.GetExtension(pageName);
                 string fullPath = $"{Dir.FullName}\\{localPageName}{pageExtension}";
                
                 // get url to image page
-                string pageUrl = $"{ChapterInfo.ServerUrl}/{ChapterInfo.Hash}/{pageName}";
+                string pageUrl = $"{chapterInfo.ServerUrl}/{chapterInfo.Hash}/{pageName}";
 
                 var config = Configuration.Default.WithDefaultLoader();
                 var context = BrowsingContext.New(config);

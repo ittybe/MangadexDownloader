@@ -129,11 +129,6 @@
             interface for chapter parser
             </summary>
         </member>
-        <member name="P:MangadexDownloader.Parsing.ContentParsing.IChapterParser.ChapterInfo">
-            <summary>
-            Chapter info for parsing
-            </summary>
-        </member>
         <member name="P:MangadexDownloader.Parsing.ContentParsing.IChapterParser.Pattern">
             <summary>
             pattern for naming every page, regular expression
@@ -144,10 +139,11 @@
             dir for pages
             </summary>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.IChapterParser.Parse">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.IChapterParser.Parse(MangadexDownloader.ContentInfo.IChapterInfo)">
             <summary>
             parse pages into directory
             </summary>
+            <param name="chapterInfo">chapterInfo for parsing</param>
         </member>
         <member name="T:MangadexDownloader.Parsing.ContentParsing.IMangaParser">
             <summary>
@@ -173,13 +169,60 @@
             <summary>
             parse all pages
             </summary>
-            <param name="match">parse if only ChapterInfo is match,</param>
+            <param name="match">parse if only ChapterInfo is match</param>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.IChapterInfo})">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
             <summary>
             parse chapters info into List IChapterInfo property
             </summary>
-            <param name="match">add ChapterInfo to list if ChapterInfo match</param>
+            <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.#ctor(MangadexDownloader.ContentInfo.IMangaInfo,System.IO.DirectoryInfo)">
+            <summary>
+            get directly mangainfo object
+            </summary>
+            <param name="mangaInfo">manga to parse</param>
+            <param name="dir">directory for all pages</param>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.#ctor(System.Int32,System.IO.DirectoryInfo)">
+            <summary>
+            get manga info by id
+            </summary>
+            <param name="id">manga's id to parse</param>
+            <param name="dir">directory for all pages</param>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.#ctor(System.IO.DirectoryInfo)">
+            <summary>
+            set only dir, but you still have to define MangaInfo!
+            </summary>
+            <param name="dir">directory for all pages</param>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.MangaParser.MangaInfo">
+            <summary>
+            manga to parse
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.MangaParser.ChaptersInfo">
+            <summary>
+            chapters info (to get info use method ParseChaptersInfo)
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.MangaParser.Dir">
+            <summary>
+            Directory where save all pages
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.Parse(System.Predicate{MangadexDownloader.ContentInfo.IChapterInfo})">
+            <summary>
+            parse all chapters in ChaptersInfo
+            </summary>
+            <param name="match">predicate for chapters</param>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
+            <summary>
+            parse chapters info into chaptersInfo list
+            </summary>
+            <param name="match">predicate for chapters</param>
         </member>
         <member name="M:MangadexDownloader.Parsing.JsonParsing.IChapterJsonParser.ConvertJson(System.String)">
             <summary>

@@ -14,7 +14,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// <summary>
         /// information about manga
         /// </summary>
-        IMangaInfo MangaInfo { get; }
+        IMangaInfo MangaInfo { get; set; }
         /// <summary>
         /// Contains information about all Chapters
         /// </summary>
@@ -28,13 +28,13 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// <summary>
         /// parse all pages
         /// </summary>
-        /// <param name="match">parse if only ChapterInfo is match,</param>
+        /// <param name="match">parse if only ChapterInfo is match</param>
         void Parse(Predicate<IChapterInfo> match);
      
         /// <summary>
         /// parse chapters info into List IChapterInfo property
         /// </summary>
-        /// <param name="match">add ChapterInfo to list if ChapterInfo match</param>
-        void ParseChaptersInfo(Predicate<IChapterInfo> match);
+        /// <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
+        void ParseChaptersInfo(Predicate<MangaInfo.ShortChapterInfo> match);
     }
 }
