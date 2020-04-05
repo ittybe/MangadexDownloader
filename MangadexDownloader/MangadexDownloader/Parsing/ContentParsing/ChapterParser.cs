@@ -21,14 +21,13 @@ namespace MangadexDownloader.Parsing.ContentParsing
 
         public void Parse(IChapterInfo chapterInfo)
         {
-            int pageNumber = 1;
-            foreach (var page in chapterInfo.PageArray) 
+            foreach (var page in chapterInfo.Pages) 
             {
                 // page's names have string type
-                string pageName = page.ToObject<string>();
+                string pageName = page.PageName;
                 // local page name and full path to page
                 // VOLUMENUMBER_CHAPTERNUMBER_PAGENUMBER
-                string localPageName = $"{chapterInfo.Volume}_{chapterInfo.Chapter}_{pageNumber++}";
+                string localPageName = $"{chapterInfo.Volume}_{chapterInfo.Chapter}_{page.PageNumber}";
                 string pageExtension = Path.GetExtension(pageName);
                 string fullPath = $"{Dir.FullName}\\{localPageName}{pageExtension}";
                

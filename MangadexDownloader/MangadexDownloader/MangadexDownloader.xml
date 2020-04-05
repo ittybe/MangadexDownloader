@@ -4,6 +4,21 @@
         <name>MangadexDownloader</name>
     </assembly>
     <members>
+        <member name="P:MangadexDownloader.ContentInfo.ChapterInfo.Pages">
+            <summary>
+            all pages
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.ChapterInfo.Page.PageName">
+            <summary>
+            page file name
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.ChapterInfo.Page.PageNumber">
+            <summary>
+            page number in chapter
+            </summary>
+        </member>
         <member name="T:MangadexDownloader.ContentInfo.IChapterInfo">
             <summary>
             Interface for class ChapterInfo
@@ -32,6 +47,11 @@
         <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.PageArray">
             <summary>
             JArray with all pages in it
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.Pages">
+            <summary>
+            Pages info (name, number)
             </summary>
         </member>
         <member name="P:MangadexDownloader.ContentInfo.IChapterInfo.LangCode">

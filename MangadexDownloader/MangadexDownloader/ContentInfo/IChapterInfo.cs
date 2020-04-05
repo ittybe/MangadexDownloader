@@ -36,6 +36,11 @@ namespace MangadexDownloader.ContentInfo
         JArray PageArray { get; }
 
         /// <summary>
+        /// Pages info (name, number)
+        /// </summary>
+        List<ChapterInfo.Page> Pages { get; }
+
+        /// <summary>
         /// language code
         /// </summary>
         string LangCode { get; }
