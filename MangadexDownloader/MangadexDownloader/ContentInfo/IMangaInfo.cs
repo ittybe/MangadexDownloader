@@ -24,5 +24,10 @@ namespace MangadexDownloader.ContentInfo
         /// chapters info
         /// </summary>
         JObject Chapters { get; }
+
+        /// <summary>
+        /// short info about manga
+        /// </summary>
+        List<MangaInfo.ShortChapterInfo> ShortChaptersInfo { get; }
     }
 }

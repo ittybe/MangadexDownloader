@@ -74,6 +74,11 @@
             chapters info
             </summary>
         </member>
+        <member name="P:MangadexDownloader.ContentInfo.IMangaInfo.ShortChaptersInfo">
+            <summary>
+            short info about manga
+            </summary>
+        </member>
         <member name="P:MangadexDownloader.ContentInfo.MangaInfo.CoverUrl">
             <summary>
             manga's cover url
@@ -87,6 +92,36 @@
         <member name="P:MangadexDownloader.ContentInfo.MangaInfo.Chapters">
             <summary>
             Chapters in manga
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.ShortChaptersInfo">
+            <summary>
+            ShortChaptersInfo contains short info about all chapters in manga (volume number, chapter number, id and language code)
+            </summary>
+        </member>
+        <member name="T:MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo">
+            <summary>
+            short information about chapter
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo.Id">
+            <summary>
+            Id of this chapter
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo.Volume">
+            <summary>
+            volume number
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo.Chapter">
+            <summary>
+            chapter number
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo.LangCode">
+            <summary>
+            lang Code of this chapter
             </summary>
         </member>
         <member name="T:MangadexDownloader.Parsing.ContentParsing.IChapterParser">
@@ -113,6 +148,38 @@
             <summary>
             parse pages into directory
             </summary>
+        </member>
+        <member name="T:MangadexDownloader.Parsing.ContentParsing.IMangaParser">
+            <summary>
+            interface for MangaParser
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.IMangaParser.MangaInfo">
+            <summary>
+            information about manga
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ChaptersInfo">
+            <summary>
+            Contains information about all Chapters
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.IMangaParser.Dir">
+            <summary>
+            dir for pages
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.Parse(System.Predicate{MangadexDownloader.ContentInfo.IChapterInfo})">
+            <summary>
+            parse all pages
+            </summary>
+            <param name="match">parse if only ChapterInfo is match,</param>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.IChapterInfo})">
+            <summary>
+            parse chapters info into List IChapterInfo property
+            </summary>
+            <param name="match">add ChapterInfo to list if ChapterInfo match</param>
         </member>
         <member name="M:MangadexDownloader.Parsing.JsonParsing.IChapterJsonParser.ConvertJson(System.String)">
             <summary>
