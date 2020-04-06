@@ -23,7 +23,7 @@ namespace MangadexDownloader.Parsing.JsonParsing
             var document = context.OpenAsync($"https://mangadex.org/api/chapter/{id}").Result;
             // select tag with only json info
             var element = document.QuerySelector("pre");
-            if (element.TextContent == null)
+            if (element == null)
                 throw new ApplicationException("Parsing json is failed!");
             return element.TextContent;
         }

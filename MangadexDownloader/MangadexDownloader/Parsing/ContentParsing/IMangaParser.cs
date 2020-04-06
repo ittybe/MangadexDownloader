@@ -40,8 +40,8 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// <summary>
         /// paralell parse chapters info
         /// </summary>
-        /// <param name="processes">how many processes is running at the same time</param>
+        /// <param name="threadsNumber">how many threads is running at the same time</param>
         /// <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
-        void ParseChaptersInfoThreadPool(int processes, Predicate<MangaInfo.ShortChapterInfo> match);
+        void ParseChaptersInfoMultiThreading(int threads, Predicate<MangaInfo.ShortChapterInfo> match);
     }
 }

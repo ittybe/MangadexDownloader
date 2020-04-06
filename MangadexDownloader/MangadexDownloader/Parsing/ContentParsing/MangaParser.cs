@@ -86,32 +86,69 @@ namespace MangadexDownloader.Parsing.ContentParsing
                 }
             }
         }
+
         /// <summary>
         /// paralell parse chapters info
         /// </summary>
-        /// <param name="processes">how many processes is running at the same time</param>
+        /// <param name="threadsNumber">how many threads is running at the same time</param>
         /// <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
-        public void ParseChaptersInfoThreadPool(int processes, Predicate<MangaInfo.ShortChapterInfo> match)
+        public void ParseChaptersInfoMultiThreading(int threadsNumber, Predicate<MangaInfo.ShortChapterInfo> match)
         {
             IChapterJsonParser jsonParser = new ChapterJsonParser();
-            ThreadPool.SetMaxThreads(processes, processes);
+            Thread[] threads = new Thread[threadsNumber];
+            int threadsIndex = 0;
 
             foreach (var chapter in MangaInfo.ShortChaptersInfo)
             {
                 // check if it s match the request
                 if (match(chapter))
                 {
-                    WaitCallback parse = state =>
+                    // we use post increament so we just compare this values
+                    if (threadsIndex == threadsNumber) 
                     {
+                        threadsIndex = 0;
+                        // start threads
+                        foreach (var thread in threads)
+                        {
+                            thread.Start();
+                        }
+                        //// wait for thread's work complete
+                        //foreach (var thread in threads)
+                        //{
+                        //    thread.Join();
+                        //}
+                    }
+                    // parse json func 
+                    ThreadStart parseFunc = () =>
+                    {
+                        // wait for calling thread wait for end of the parsing
+                        
+
+                        // parse data from site
                         var chapterLocal = chapter;
                         int id = Convert.ToInt32(chapterLocal.Id);
                         IChapterInfo info = jsonParser.GetChapterInfo(id);
                         ChaptersInfo.Add(info);
                     };
-                    ThreadPool.QueueUserWorkItem(parse);
+                    threads[threadsIndex++] = new Thread(parseFunc);
                 }
             }
-            
+            // if something left in threads array and yeah there only matched chapters
+            if (threadsIndex > 0)
+            {
+                // threadsIndex is size of the array with useful parseFuncs
+                // start threads  
+                for (int i = 0; i < threadsIndex; i++)
+                {
+                    threads[i].Start();
+                }
+                // wait for thread's work complete
+                for (int i = 0; i < threadsIndex; i++)
+                {
+                    threads[i].Join();
+                }
+            }
+
         }
     }
 }

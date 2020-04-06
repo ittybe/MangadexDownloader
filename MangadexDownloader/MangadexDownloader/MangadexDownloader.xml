@@ -197,11 +197,11 @@
             </summary>
             <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfoThreadPool(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfoMultiThreading(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
             <summary>
             paralell parse chapters info
             </summary>
-            <param name="processes">how many processes is running at the same time</param>
+            <param name="threadsNumber">how many threads is running at the same time</param>
             <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
         </member>
         <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.#ctor(MangadexDownloader.ContentInfo.IMangaInfo,System.IO.DirectoryInfo)">
@@ -251,12 +251,20 @@
             </summary>
             <param name="match">predicate for chapters</param>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfoThreadPool(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfoMultiThreading(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
             <summary>
             paralell parse chapters info
             </summary>
-            <param name="processes">how many processes is running at the same time</param>
+            <param name="threadsNumber">how many threads is running at the same time</param>
             <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.ChapterJsonParser.GetJson(System.Int32)">
+            <summary>
+            Get chapter json
+            </summary>
+            <param name="id">chapter's id</param>
+            <exception cref="T:System.ApplicationException"></exception>
+            <returns>json string about chapter</returns>
         </member>
         <member name="M:MangadexDownloader.Parsing.JsonParsing.IChapterJsonParser.ConvertJson(System.String)">
             <summary>
@@ -297,6 +305,14 @@
             </summary>
             <param name="id">chapter's id</param>
             <returns>ChapterInfo instance</returns>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.MangaJsonParser.GetJson(System.Int32)">
+            <summary>
+            Get manga json
+            </summary>
+            <param name="id">manga's id</param>
+            <exception cref="T:System.ApplicationException"></exception>
+            <returns>json string about manga</returns>
         </member>
     </members>
 </doc>
