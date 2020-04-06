@@ -10,6 +10,12 @@ namespace MangadexDownloader.Parsing.JsonParsing
 {
     public class ChapterJsonParser : IChapterJsonParser
     {
+        /// <summary>
+        /// Get chapter json
+        /// </summary>
+        /// <param name="id">chapter's id</param>
+        /// <exception cref="ApplicationException"></exception>
+        /// <returns>json string about chapter</returns>
         public string GetJson(int id)
         {
             var config = Configuration.Default.WithDefaultLoader();
@@ -17,6 +23,8 @@ namespace MangadexDownloader.Parsing.JsonParsing
             var document = context.OpenAsync($"https://mangadex.org/api/chapter/{id}").Result;
             // select tag with only json info
             var element = document.QuerySelector("pre");
+            if (element.TextContent == null)
+                throw new ApplicationException("Parsing json is failed!");
             return element.TextContent;
         }
         public ChapterInfo ConvertJson(string json)

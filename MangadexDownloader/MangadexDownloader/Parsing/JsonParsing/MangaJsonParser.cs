@@ -9,6 +9,12 @@ namespace MangadexDownloader.Parsing.JsonParsing
 {
     public class MangaJsonParser : IMangaJsonParser
     {
+        /// <summary>
+        /// Get manga json
+        /// </summary>
+        /// <param name="id">manga's id</param>
+        /// <exception cref="ApplicationException"></exception>
+        /// <returns>json string about manga</returns>
         public string GetJson(int id)
         {
             var config = Configuration.Default.WithDefaultLoader();
@@ -17,6 +23,8 @@ namespace MangadexDownloader.Parsing.JsonParsing
 
             // select tag with only json info
             var element = document.QuerySelector("pre");
+            if (element.TextContent == null)
+                throw new ApplicationException("Parsing json is failed!");
             return element.TextContent;
         }
         
