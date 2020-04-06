@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace MangadexDownloader.Parsing.ContentParsing
 {
@@ -83,6 +85,33 @@ namespace MangadexDownloader.Parsing.ContentParsing
                     ChaptersInfo.Add(info);
                 }
             }
+        }
+        /// <summary>
+        /// paralell parse chapters info
+        /// </summary>
+        /// <param name="processes">how many processes is running at the same time</param>
+        /// <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
+        public void ParseChaptersInfoThreadPool(int processes, Predicate<MangaInfo.ShortChapterInfo> match)
+        {
+            IChapterJsonParser jsonParser = new ChapterJsonParser();
+            ThreadPool.SetMaxThreads(processes, processes);
+
+            foreach (var chapter in MangaInfo.ShortChaptersInfo)
+            {
+                // check if it s match the request
+                if (match(chapter))
+                {
+                    WaitCallback parse = state =>
+                    {
+                        var chapterLocal = chapter;
+                        int id = Convert.ToInt32(chapterLocal.Id);
+                        IChapterInfo info = jsonParser.GetChapterInfo(id);
+                        ChaptersInfo.Add(info);
+                    };
+                    ThreadPool.QueueUserWorkItem(parse);
+                }
+            }
+            
         }
     }
 }

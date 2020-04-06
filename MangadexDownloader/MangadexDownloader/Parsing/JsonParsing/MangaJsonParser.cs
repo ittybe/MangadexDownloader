@@ -14,6 +14,7 @@ namespace MangadexDownloader.Parsing.JsonParsing
             var config = Configuration.Default.WithDefaultLoader();
             var context = BrowsingContext.New(config);
             var document = context.OpenAsync($"https://mangadex.org/api/manga/{id}").Result;
+
             // select tag with only json info
             var element = document.QuerySelector("pre");
             return element.TextContent;
@@ -22,6 +23,8 @@ namespace MangadexDownloader.Parsing.JsonParsing
         public MangaInfo ConvertJson(string json)
         {
             MangaInfo mangaInfo = JsonConvert.DeserializeObject<MangaInfo>(json);
+            if (mangaInfo.ShortChaptersInfo.Count < 1)
+                throw new ApplicationException($"MangaInfo json is invalid");
             return mangaInfo;
         }
 

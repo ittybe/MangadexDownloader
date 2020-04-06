@@ -22,6 +22,8 @@ namespace MangadexDownloader.Parsing.JsonParsing
         public ChapterInfo ConvertJson(string json)
         {
             ChapterInfo chapterInfo = JsonConvert.DeserializeObject<ChapterInfo>(json);
+            if (chapterInfo.Volume.CompareTo(string.Empty) == 0)
+                throw new ApplicationException("ChapterInfo json is invalid");
             return chapterInfo;
         }
         public ChapterInfo GetChapterInfo(int id) 

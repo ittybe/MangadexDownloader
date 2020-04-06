@@ -197,6 +197,13 @@
             </summary>
             <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
         </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfoThreadPool(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
+            <summary>
+            paralell parse chapters info
+            </summary>
+            <param name="processes">how many processes is running at the same time</param>
+            <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
+        </member>
         <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.#ctor(MangadexDownloader.ContentInfo.IMangaInfo,System.IO.DirectoryInfo)">
             <summary>
             get directly mangainfo object
@@ -243,6 +250,13 @@
             parse chapters info into chaptersInfo list
             </summary>
             <param name="match">predicate for chapters</param>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfoThreadPool(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
+            <summary>
+            paralell parse chapters info
+            </summary>
+            <param name="processes">how many processes is running at the same time</param>
+            <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
         </member>
         <member name="M:MangadexDownloader.Parsing.JsonParsing.IChapterJsonParser.ConvertJson(System.String)">
             <summary>

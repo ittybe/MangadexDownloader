@@ -23,29 +23,34 @@ namespace MangadexDownloader.Parsing.ContentParsing
         {
             foreach (var page in chapterInfo.Pages) 
             {
-                // page's names have string type
-                string pageName = page.PageName;
-                // local page name and full path to page
-                // VOLUMENUMBER_CHAPTERNUMBER_PAGENUMBER
-                string localPageName = $"{chapterInfo.Volume}_{chapterInfo.Chapter}_{page.PageNumber}";
-                string pageExtension = Path.GetExtension(pageName);
-                string fullPath = $"{Dir.FullName}\\{localPageName}{pageExtension}";
-               
-                // get url to image page
-                string pageUrl = $"{chapterInfo.ServerUrl}/{chapterInfo.Hash}/{pageName}";
-
-                var config = Configuration.Default.WithDefaultLoader();
-                var context = BrowsingContext.New(config);
-
-                var download = context.GetService<IDocumentLoader>().FetchAsync(new DocumentRequest(new Url(pageUrl)));
-                
-                var response = download.Task.Result;
-
-                // write content to image file
-
-                FileStream writer = File.OpenWrite(fullPath);
-                response.Content.CopyTo(writer);
+                // parse one page
+                ParsePage(page, chapterInfo);
             }
+        }
+        protected void ParsePage(ChapterInfo.Page page, IChapterInfo chapterInfo) 
+        {
+            // page's names have string type
+            string pageName = page.PageName;
+            // local page name and full path to page
+            // VOLUMENUMBER_CHAPTERNUMBER_PAGENUMBER
+            string localPageName = $"{chapterInfo.Volume}_{chapterInfo.Chapter}_{page.PageNumber}";
+            string pageExtension = Path.GetExtension(pageName);
+            string fullPath = $"{Dir.FullName}\\{localPageName}{pageExtension}";
+
+            // get url to image page
+            string pageUrl = $"{chapterInfo.ServerUrl}/{chapterInfo.Hash}/{pageName}";
+
+            var config = Configuration.Default.WithDefaultLoader();
+            var context = BrowsingContext.New(config);
+
+            var download = context.GetService<IDocumentLoader>().FetchAsync(new DocumentRequest(new Url(pageUrl)));
+
+            var response = download.Task.Result;
+
+            // write content to image file
+
+            FileStream writer = File.OpenWrite(fullPath);
+            response.Content.CopyTo(writer);
         }
     }
 }
