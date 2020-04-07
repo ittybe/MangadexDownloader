@@ -20,6 +20,6 @@ namespace MangadexDownloader.ContentCollecting
 {
     interface IContentCollector
     {
-
+        
     }
 }

@@ -28,6 +28,6 @@ namespace MangadexDownloader.ContentInfo
         /// <summary>
         /// short info about manga
         /// </summary>
-        List<MangaInfo.ShortChapterInfo> ShortChaptersInfo { get; }
+        List<ShortChapterInfo> ShortChaptersInfo { get; }
     }
 }

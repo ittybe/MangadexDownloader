@@ -72,7 +72,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// parse chapters info into chaptersInfo list
         /// </summary>
         /// <param name="match">predicate for chapters</param>
-        public void ParseChaptersInfo(Predicate<MangaInfo.ShortChapterInfo> match)
+        public void ParseChaptersInfo(Predicate<ShortChapterInfo> match)
         {
             IChapterJsonParser jsonParser = new ChapterJsonParser();
             foreach (var chapter in MangaInfo.ShortChaptersInfo) 
@@ -92,7 +92,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// </summary>
         /// <param name="threadsNumber">how many threads is running at the same time</param>
         /// <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
-        public void ParseChaptersInfoMultiThreading(int threadsNumber, Predicate<MangaInfo.ShortChapterInfo> match)
+        public void ParseChaptersInfoMultiThreading(int threadsNumber, Predicate<ShortChapterInfo> match)
         {
             IChapterJsonParser jsonParser = new ChapterJsonParser();
             Thread[] threads = new Thread[threadsNumber];
