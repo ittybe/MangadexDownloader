@@ -24,7 +24,7 @@ namespace MangadexDownloader.Parsing.JsonParsing
             // select tag with only json info
             var element = document.QuerySelector("pre");
             if (element == null)
-                throw new ApplicationException("Parsing json is failed!");
+                throw new ApplicationException($"Parsing json is failed! manga id: {id}");
             return element.TextContent;
         }
         

@@ -10,7 +10,12 @@ namespace MangadexDownloader.Parsing.ContentParsing
 {
     public class ChapterParser : IChapterParser
     {
-        public string Pattern { get; } = @"[0-9\.]+_[0-9\.]+_[0-9.]+.\S+";
+        /// <summary>
+        /// pattern to file naming
+        /// this struct of name
+        /// VOLUMENUMBER_CHAPTERNUMBER_PAGENUMBER.EXTENTION;
+        /// </summary>
+        public const string Pattern = @"[0-9\.]+_[0-9\.]+_[0-9.]+.\S+";
 
         public DirectoryInfo Dir { get; set; }
 

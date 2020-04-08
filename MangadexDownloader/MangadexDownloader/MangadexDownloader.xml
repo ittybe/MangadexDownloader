@@ -4,6 +4,115 @@
         <name>MangadexDownloader</name>
     </assembly>
     <members>
+        <member name="P:MangadexDownloader.ContentCollecting.ContentCollector.Dir">
+            <summary>
+            dir that contains all pages
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.ContentCollecting.ContentCollector.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="DirPath">dir that contains all pages</param>
+        </member>
+        <member name="M:MangadexDownloader.ContentCollecting.ContentCollector.CollectContentToPdf(System.String)">
+            <summary>
+            Collect all pages from dir to pdf file 
+            </summary>
+            <param name="outputPath">pdf file output</param>
+        </member>
+        <member name="P:MangadexDownloader.ContentCollecting.IContentCollector.Dir">
+            <summary>
+            dir where all pages
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.ContentCollecting.IContentCollector.CollectContentToPdf(System.String)">
+            <summary>
+            collect all pages to pdf format
+            </summary>
+            <param name="outputPath">output file path</param>
+        </member>
+        <member name="T:MangadexDownloader.ContentCollecting.PageInfo">
+            <summary>
+            page info for local images in folder
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.ContentCollecting.PageInfo.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            set all properties in constructor
+            </summary>
+            <param name="volumeNumber"></param>
+            <param name="chapterNumber"></param>
+            <param name="pageNumber"></param>
+            <param name="extension"></param>
+        </member>
+        <member name="P:MangadexDownloader.ContentCollecting.PageInfo.VolumeNumber">
+            <summary>
+            volume number
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentCollecting.PageInfo.ChapterNumber">
+            <summary>
+            chapter number
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentCollecting.PageInfo.PageNumber">
+            <summary>
+            page number
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentCollecting.PageInfo.Extension">
+            <summary>
+            for full name
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentCollecting.PageInfo.VolumeNumberDouble">
+            <summary>
+            return VolumeNumber in double format
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentCollecting.PageInfo.ChapterNumberDouble">
+            <summary>
+            return ChapterNumber in double format
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentCollecting.PageInfo.PageNumberDouble">
+            <summary>
+            return PageNumber in double format
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.ContentCollecting.PageInfo.StringToNumber(System.String)">
+            <summary>
+            special method for volume chapter page convert into number (we have exception where chapter have point number)
+            </summary>
+            <param name="strNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MangadexDownloader.ContentCollecting.PageInfo.Fullname">
+            <summary>
+            call if all properties is filled with some data, otherwise it will raise exception
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.ContentCollecting.PageInfo.op_Explicit(System.String)~MangadexDownloader.ContentCollecting.PageInfo">
+            <summary>
+            to page info
+            </summary>
+            <param name="filename">file name</param>
+        </member>
+        <member name="M:MangadexDownloader.ContentCollecting.PageInfo.ToPageInfo(System.String)">
+            <summary>
+            convert filename to pageInfo
+            </summary>
+            <param name="filename">file name</param>
+            <returns>pageInfo</returns>
+        </member>
+        <member name="M:MangadexDownloader.ContentCollecting.PageInfo.CompareTo(MangadexDownloader.ContentCollecting.PageInfo)">
+            <summary>
+            compare pages by volume chapter and page number
+            </summary>
+            <param name="other">other page</param>
+            <returns>result</returns>
+        </member>
         <member name="P:MangadexDownloader.ContentInfo.ChapterInfo.Pages">
             <summary>
             all pages
@@ -119,39 +228,41 @@
             ShortChaptersInfo contains short info about all chapters in manga (volume number, chapter number, id and language code)
             </summary>
         </member>
-        <member name="T:MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo">
+        <member name="T:MangadexDownloader.ContentInfo.ShortChapterInfo">
             <summary>
             short information about chapter
             </summary>
         </member>
-        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo.Id">
+        <member name="P:MangadexDownloader.ContentInfo.ShortChapterInfo.Id">
             <summary>
             Id of this chapter
             </summary>
         </member>
-        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo.Volume">
+        <member name="P:MangadexDownloader.ContentInfo.ShortChapterInfo.Volume">
             <summary>
             volume number
             </summary>
         </member>
-        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo.Chapter">
+        <member name="P:MangadexDownloader.ContentInfo.ShortChapterInfo.Chapter">
             <summary>
             chapter number
             </summary>
         </member>
-        <member name="P:MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo.LangCode">
+        <member name="P:MangadexDownloader.ContentInfo.ShortChapterInfo.LangCode">
             <summary>
             lang Code of this chapter
+            </summary>
+        </member>
+        <member name="F:MangadexDownloader.Parsing.ContentParsing.ChapterParser.Pattern">
+            <summary>
+            pattern to file naming
+            this struct of name
+            VOLUMENUMBER_CHAPTERNUMBER_PAGENUMBER.EXTENTION;
             </summary>
         </member>
         <member name="T:MangadexDownloader.Parsing.ContentParsing.IChapterParser">
             <summary>
             interface for chapter parser
-            </summary>
-        </member>
-        <member name="P:MangadexDownloader.Parsing.ContentParsing.IChapterParser.Pattern">
-            <summary>
-            pattern for naming every page, regular expression
             </summary>
         </member>
         <member name="P:MangadexDownloader.Parsing.ContentParsing.IChapterParser.Dir">
@@ -191,17 +302,17 @@
             </summary>
             <param name="match">parse if only ChapterInfo is match</param>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
             <summary>
             parse chapters info into List IChapterInfo property
             </summary>
             <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfoMultiThreading(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfoMultiThreading(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
             <summary>
             paralell parse chapters info
             </summary>
-            <param name="threadsNumber">how many threads is running at the same time</param>
+            <param name="threads">how many threads is running at the same time</param>
             <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
         </member>
         <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.#ctor(MangadexDownloader.ContentInfo.IMangaInfo,System.IO.DirectoryInfo)">
@@ -245,13 +356,13 @@
             </summary>
             <param name="match">predicate for chapters</param>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
             <summary>
             parse chapters info into chaptersInfo list
             </summary>
             <param name="match">predicate for chapters</param>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfoMultiThreading(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.MangaInfo.ShortChapterInfo})">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfoMultiThreading(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
             <summary>
             paralell parse chapters info
             </summary>

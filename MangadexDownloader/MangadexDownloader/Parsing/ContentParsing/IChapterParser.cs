@@ -11,11 +11,6 @@ namespace MangadexDownloader.Parsing.ContentParsing
     public interface IChapterParser
     {
         /// <summary>
-        /// pattern for naming every page, regular expression
-        /// </summary>
-        string Pattern { get; }
-
-        /// <summary>
         /// dir for pages
         /// </summary>
         DirectoryInfo Dir { get; set; }

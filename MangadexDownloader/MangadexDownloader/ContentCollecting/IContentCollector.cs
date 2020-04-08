@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MangadexDownloader.ContentInfo;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 //PdfImage image = PdfImage.FromFile(@"D:\images\bear.tif");
@@ -18,8 +20,17 @@ using System.Text;
 //page.Canvas.DrawImage(image, 30, 30, fitWidth, fitHeight);
 namespace MangadexDownloader.ContentCollecting
 {
-    interface IContentCollector
+    public interface IContentCollector
     {
+        /// <summary>
+        /// dir where all pages
+        /// </summary>
+        DirectoryInfo Dir { get; set; }
         
+        /// <summary>
+        /// collect all pages to pdf format
+        /// </summary>
+        /// <param name="outputPath">output file path</param>
+        void CollectContentToPdf(string outputPath);
     }
 }
