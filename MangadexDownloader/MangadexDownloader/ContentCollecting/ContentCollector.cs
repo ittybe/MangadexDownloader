@@ -41,7 +41,8 @@ namespace MangadexDownloader.ContentCollecting
             pages.Sort();
             
             PdfDocument pdfDocument = new PdfDocument(new PdfWriter(outputPath));
-            int pagePdf = 0;
+            List<ImageData> imagesData= new List<ImageData>();
+            // create image size shape pages
             foreach (var page in pages)
             {
                 // read image 
@@ -49,30 +50,42 @@ namespace MangadexDownloader.ContentCollecting
                 string inputImagePath = $@"{Dir.FullName}\{page.Fullname}";
                 ImageData imageData = ImageDataFactory.Create(inputImagePath);
 
-                // Load image from disk
-                
+                // page size equals image size
+
+                PageSize pageSize = new PageSize(imageData.GetWidth(), imageData.GetHeight());
+
+                // add page-image-size-shape
+
+                pdfDocument.AddNewPage(pageSize);
+
+                // save path
+
+                imagesData.Add(imageData);
+            }
+            // document 
+            Document document = new Document(pdfDocument);
+            foreach (var imageData in imagesData)
+            {
+                // image
                 Image image = new Image(imageData);
+
+                // set in full page
+
                 image.SetAutoScale(false);
                 image.SetFixedPosition(0, 0);
 
-                PageSize pageSize = new PageSize(image.GetImageWidth(), image.GetImageHeight());
-                
-                // Document to add layout elements: paragraphs, images etc
-                
-                Document document = new Document(pdfDocument, pageSize);
-
-                // add content to next pages, we re doing that because we have pages that has different size and so on 
-                
-                document.Add(new AreaBreak(AreaBreakType.LAST_PAGE));
-
-                // Create layout image object and provide parameters.
+                // add image
 
                 document.Add(image);
+
+                // go to next page
+
+                document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
             }
-            if (pdfDocument.GetNumberOfPages() > 0) 
-            {
-                pdfDocument.Close();
-            }
+            //if (pdfDocument.GetNumberOfPages() > 0) 
+            //{
+            //    pdfDocument.Close();
+            //}
         }
 
 
