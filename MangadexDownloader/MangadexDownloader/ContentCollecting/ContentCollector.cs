@@ -88,7 +88,10 @@ namespace MangadexDownloader.ContentCollecting
             }
         }
 
-
+        /// <summary>
+        /// get pages info from Dir
+        /// </summary>
+        /// <returns>pages info</returns>
         protected List<PageInfo> GetPagesInfo() 
         {
             List<PageInfo> pages = new List<PageInfo>();

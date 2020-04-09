@@ -118,8 +118,17 @@ namespace MangadexDownloader.ContentCollecting
             {
                 throw new ArgumentException($"Filename ({filename}) doesn't match ChapterParser.Pattern ({ChapterParser.Pattern}), can't convert name that doens't match this pattern");
             }
+
+            // replace last extension point to '_' (splitting char)
+            
+            int pointExtension = filename.LastIndexOf('.');
+            char[] filenameChar = filename.ToCharArray();
+            filenameChar[pointExtension] = '_';
+
+            // split filename to parts
             PageInfo pageInfo = new PageInfo();
-            string[] parts = filename.Split('_', '.');
+            
+            string[] parts = filename.Split('_');
             
             pageInfo.VolumeNumber = parts[0];
             pageInfo.ChapterNumber = parts[1];

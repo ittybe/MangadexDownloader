@@ -21,6 +21,12 @@
             </summary>
             <param name="outputPath">pdf file output</param>
         </member>
+        <member name="M:MangadexDownloader.ContentCollecting.ContentCollector.GetPagesInfo">
+            <summary>
+            get pages info from Dir
+            </summary>
+            <returns>pages info</returns>
+        </member>
         <member name="P:MangadexDownloader.ContentCollecting.IContentCollector.Dir">
             <summary>
             dir where all pages
