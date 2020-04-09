@@ -36,45 +36,57 @@ namespace MangadexDownloader.Parsing.ContentParsing
         }
 
         /// <summary>
-        /// set only dir, but you still have to define MangaInfo!
-        /// </summary>
-        /// <param name="dir">directory for all pages</param>
-        public MangaParser(DirectoryInfo dir)
-        {
-            Dir = dir;
-        }
-
-        /// <summary>
         /// manga to parse
         /// </summary>
         public IMangaInfo MangaInfo { get; set; }
+        
         /// <summary>
         /// chapters info (to get info use method ParseChaptersInfo)
         /// </summary>
-        public List<IChapterInfo> ChaptersInfo { get; } = new List<IChapterInfo>();
+        private List<IChapterInfo> ChaptersInfo { get; set; }
+        
         /// <summary>
         /// Directory where save all pages
         /// </summary>
         public DirectoryInfo Dir { get; set; }
+
+        /// <summary>
+        /// parse chapter's pages into Dir
+        /// </summary>
+        /// <param name="match">match for parsing chapters</param>
+        public void Parse(Predicate<ShortChapterInfo> match)
+        {
+            // parse info into List<IChapterInfo>
+            ChaptersInfo = ParseChaptersInfo(match);
+            
+            // always true , because we already get chapters we needed
+            ParseChapters(chapter => true);
+        }
+
+
+
         /// <summary>
         /// parse all chapters in ChaptersInfo
         /// </summary>
         /// <param name="match">predicate for chapters</param>
-        public void Parse(Predicate<IChapterInfo>match)
+        protected void ParseChapters(Predicate<IChapterInfo>match)
         {
             IChapterParser chapterParser = new ChapterParser(Dir);
+
             foreach (var chapter in ChaptersInfo)
             {
                 chapterParser.Parse(chapter);
             }
         }
+        
         /// <summary>
-        /// parse chapters info into chaptersInfo list
+        /// parse chapters info
         /// </summary>
         /// <param name="match">predicate for chapters</param>
-        public void ParseChaptersInfo(Predicate<ShortChapterInfo> match)
+        public List<IChapterInfo> ParseChaptersInfo(Predicate<ShortChapterInfo> match)
         {
             IChapterJsonParser jsonParser = new ChapterJsonParser();
+            List<IChapterInfo> chaptersInfo = new List<IChapterInfo>();
             foreach (var chapter in MangaInfo.ShortChaptersInfo) 
             {
                 // check if it s match the request
@@ -82,9 +94,10 @@ namespace MangadexDownloader.Parsing.ContentParsing
                 {
                     int id = Convert.ToInt32(chapter.Id);
                     IChapterInfo info = jsonParser.GetChapterInfo(id);
-                    ChaptersInfo.Add(info);
+                    chaptersInfo.Add(info);
                 }
             }
+            return chaptersInfo;
         }
 
         /// <summary>
@@ -92,7 +105,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// </summary>
         /// <param name="threadsNumber">how many threads is running at the same time</param>
         /// <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
-        public void ParseChaptersInfoMultiThreading(int threadsNumber, Predicate<ShortChapterInfo> match)
+        protected void ParseChaptersInfoMultiThreading(int threadsNumber, Predicate<ShortChapterInfo> match)
         {
             IChapterJsonParser jsonParser = new ChapterJsonParser();
             Thread[] threads = new Thread[threadsNumber];

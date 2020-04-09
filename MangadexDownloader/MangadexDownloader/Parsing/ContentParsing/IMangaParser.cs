@@ -15,33 +15,23 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// information about manga
         /// </summary>
         IMangaInfo MangaInfo { get; set; }
-        /// <summary>
-        /// Contains information about all Chapters
-        /// </summary>
-        List<IChapterInfo> ChaptersInfo { get; }
-
+        
         /// <summary>
         /// dir for pages
         /// </summary>
         DirectoryInfo Dir { get; set; }
 
         /// <summary>
-        /// parse all pages
+        /// parse chapter's pages into Dir
         /// </summary>
-        /// <param name="match">parse if only ChapterInfo is match</param>
-        void Parse(Predicate<IChapterInfo> match);
-     
+        /// <param name="match">match for parsing chapters</param>
+        void Parse(Predicate<ShortChapterInfo> match);
+        
         /// <summary>
-        /// parse chapters info into List IChapterInfo property
+        /// parse chapter's info from manga
         /// </summary>
-        /// <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
-        void ParseChaptersInfo(Predicate<ShortChapterInfo> match);
-
-        /// <summary>
-        /// paralell parse chapters info
-        /// </summary>
-        /// <param name="threads">how many threads is running at the same time</param>
-        /// <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
-        void ParseChaptersInfoMultiThreading(int threads, Predicate<ShortChapterInfo> match);
+        /// <param name="match">match for what chapter will be in result</param>
+        /// <returns>list of info</returns>
+        List<IChapterInfo> ParseChaptersInfo(Predicate<ShortChapterInfo> match);
     }
 }

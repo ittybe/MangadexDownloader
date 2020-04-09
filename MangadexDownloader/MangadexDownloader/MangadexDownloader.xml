@@ -286,34 +286,23 @@
             information about manga
             </summary>
         </member>
-        <member name="P:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ChaptersInfo">
-            <summary>
-            Contains information about all Chapters
-            </summary>
-        </member>
         <member name="P:MangadexDownloader.Parsing.ContentParsing.IMangaParser.Dir">
             <summary>
             dir for pages
             </summary>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.Parse(System.Predicate{MangadexDownloader.ContentInfo.IChapterInfo})">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.Parse(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
             <summary>
-            parse all pages
+            parse chapter's pages into Dir
             </summary>
-            <param name="match">parse if only ChapterInfo is match</param>
+            <param name="match">match for parsing chapters</param>
         </member>
         <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
             <summary>
-            parse chapters info into List IChapterInfo property
+            parse chapter's info from manga
             </summary>
-            <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
-        </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.IMangaParser.ParseChaptersInfoMultiThreading(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
-            <summary>
-            paralell parse chapters info
-            </summary>
-            <param name="threads">how many threads is running at the same time</param>
-            <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
+            <param name="match">match for what chapter will be in result</param>
+            <returns>list of info</returns>
         </member>
         <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.#ctor(MangadexDownloader.ContentInfo.IMangaInfo,System.IO.DirectoryInfo)">
             <summary>
@@ -327,12 +316,6 @@
             get manga info by id
             </summary>
             <param name="id">manga's id to parse</param>
-            <param name="dir">directory for all pages</param>
-        </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.#ctor(System.IO.DirectoryInfo)">
-            <summary>
-            set only dir, but you still have to define MangaInfo!
-            </summary>
             <param name="dir">directory for all pages</param>
         </member>
         <member name="P:MangadexDownloader.Parsing.ContentParsing.MangaParser.MangaInfo">
@@ -350,7 +333,13 @@
             Directory where save all pages
             </summary>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.Parse(System.Predicate{MangadexDownloader.ContentInfo.IChapterInfo})">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.Parse(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
+            <summary>
+            parse chapter's pages into Dir
+            </summary>
+            <param name="match">match for parsing chapters</param>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChapters(System.Predicate{MangadexDownloader.ContentInfo.IChapterInfo})">
             <summary>
             parse all chapters in ChaptersInfo
             </summary>
@@ -358,7 +347,7 @@
         </member>
         <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
             <summary>
-            parse chapters info into chaptersInfo list
+            parse chapters info
             </summary>
             <param name="match">predicate for chapters</param>
         </member>
