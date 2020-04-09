@@ -76,7 +76,7 @@ namespace MangadexDownloader.ContentCollecting
         {
             if (strNumber != null)
             {
-                strNumber.Replace('.', ',');
+                strNumber = strNumber.Replace('.', ',');
                 double result;
                 if (double.TryParse(strNumber, out result))
                     return result;
