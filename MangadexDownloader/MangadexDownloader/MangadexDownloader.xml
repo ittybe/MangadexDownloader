@@ -377,6 +377,20 @@
             <exception cref="T:System.ApplicationException"></exception>
             <returns>json string about chapter</returns>
         </member>
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.ChapterJsonParser.ConvertJson(System.String)">
+            <summary>
+            convert json string to ChapterInfo instance
+            </summary>
+            <param name="json">chapter's json</param>
+            <returns>ChapterInfo instance</returns>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.ChapterJsonParser.GetChapterInfo(System.Int32)">
+            <summary>
+            convert chapter's id into ChapterInfo instance
+            </summary>
+            <param name="id">chapter's id</param>
+            <returns>ChapterInfo instance</returns>
+        </member>
         <member name="M:MangadexDownloader.Parsing.JsonParsing.IChapterJsonParser.ConvertJson(System.String)">
             <summary>
             convert json string to ChapterInfo instance
@@ -424,6 +438,20 @@
             <param name="id">manga's id</param>
             <exception cref="T:System.ApplicationException"></exception>
             <returns>json string about manga</returns>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.MangaJsonParser.ConvertJson(System.String)">
+            <summary>
+            convert json string into mangaInfo object
+            </summary>
+            <param name="json">manga json</param>
+            <returns>mangainfo</returns>
+        </member>
+        <member name="M:MangadexDownloader.Parsing.JsonParsing.MangaJsonParser.GetMangaInfo(System.Int32)">
+            <summary>
+            get mangaInfo by id
+            </summary>
+            <param name="id">manga's id</param>
+            <returns>mangaInfo</returns>
         </member>
     </members>
 </doc>
