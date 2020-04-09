@@ -260,6 +260,13 @@
             VOLUMENUMBER_CHAPTERNUMBER_PAGENUMBER.EXTENTION;
             </summary>
         </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.ChapterParser.ParsePage(MangadexDownloader.ContentInfo.ChapterInfo.Page,MangadexDownloader.ContentInfo.IChapterInfo)">
+            <summary>
+            parse page 
+            </summary>
+            <param name="page">page info in chapter inf</param>
+            <param name="chapterInfo">chapterInfo</param>
+        </member>
         <member name="T:MangadexDownloader.Parsing.ContentParsing.IChapterParser">
             <summary>
             interface for chapter parser
@@ -303,6 +310,11 @@
             </summary>
             <param name="match">match for what chapter will be in result</param>
             <returns>list of info</returns>
+        </member>
+        <member name="T:MangadexDownloader.Parsing.ContentParsing.MangaParser">
+            <summary>
+            parse chapter's pages into Dir
+            </summary>
         </member>
         <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.#ctor(MangadexDownloader.ContentInfo.IMangaInfo,System.IO.DirectoryInfo)">
             <summary>

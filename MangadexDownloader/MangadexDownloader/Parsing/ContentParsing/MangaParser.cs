@@ -10,6 +10,9 @@ using System.Threading;
 
 namespace MangadexDownloader.Parsing.ContentParsing
 {
+    /// <summary>
+    /// parse chapter's pages into Dir
+    /// </summary>
     public class MangaParser : IMangaParser
     {
         /// <summary>
@@ -62,8 +65,6 @@ namespace MangadexDownloader.Parsing.ContentParsing
             // always true , because we already get chapters we needed
             ParseChapters(chapter => true);
         }
-
-
 
         /// <summary>
         /// parse all chapters in ChaptersInfo

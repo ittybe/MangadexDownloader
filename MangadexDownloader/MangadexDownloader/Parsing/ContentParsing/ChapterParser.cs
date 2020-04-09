@@ -4,6 +4,7 @@ using MangadexDownloader.ContentInfo;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Text;
 
 namespace MangadexDownloader.Parsing.ContentParsing
@@ -32,6 +33,12 @@ namespace MangadexDownloader.Parsing.ContentParsing
                 ParsePage(page, chapterInfo);
             }
         }
+
+        /// <summary>
+        /// parse page 
+        /// </summary>
+        /// <param name="page">page info in chapter inf</param>
+        /// <param name="chapterInfo">chapterInfo</param>
         protected void ParsePage(ChapterInfo.Page page, IChapterInfo chapterInfo) 
         {
             // page's names have string type
@@ -45,17 +52,36 @@ namespace MangadexDownloader.Parsing.ContentParsing
             // get url to image page
             string pageUrl = $"{chapterInfo.ServerUrl}/{chapterInfo.Hash}/{pageName}";
 
-            var config = Configuration.Default.WithDefaultLoader();
-            var context = BrowsingContext.New(config);
+            // make request to server with page
+            WebRequest request = WebRequest.Create(pageUrl);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-            var download = context.GetService<IDocumentLoader>().FetchAsync(new DocumentRequest(new Url(pageUrl)));
+            // open file
 
-            var response = download.Task.Result;
+            BinaryReader reader = new BinaryReader(response.GetResponseStream());
+
+            FileStream fileStream = File.OpenWrite(fullPath);
+            BinaryWriter writer = new BinaryWriter(fileStream);
 
             // write content to image file
 
-            FileStream writer = File.OpenWrite(fullPath);
-            response.Content.CopyTo(writer);
+            // size of buffer
+            int bufferSize = 1024;
+            byte[] buffer;
+            while (true) 
+            {
+                buffer = reader.ReadBytes(bufferSize);
+                writer.Write(buffer);
+                if (buffer.Length == 0)
+                    break;
+            }
+            // save writed data
+            writer.Flush();
+
+            // close all streams
+
+            writer.Close();
+            reader.Close();
         }
     }
 }
