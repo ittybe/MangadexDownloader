@@ -124,6 +124,7 @@ namespace MangadexDownloader.ContentCollecting
             int pointExtension = filename.LastIndexOf('.');
             char[] filenameChar = filename.ToCharArray();
             filenameChar[pointExtension] = '_';
+            filename = new string(filenameChar);
 
             // split filename to parts
             PageInfo pageInfo = new PageInfo();
