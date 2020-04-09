@@ -82,10 +82,10 @@ namespace MangadexDownloader.ContentCollecting
 
                 document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
             }
-            //if (pdfDocument.GetNumberOfPages() > 0) 
-            //{
-            //    pdfDocument.Close();
-            //}
+            if (pdfDocument.GetNumberOfPages() > 0)
+            {
+                pdfDocument.Close();
+            }
         }
 
 
