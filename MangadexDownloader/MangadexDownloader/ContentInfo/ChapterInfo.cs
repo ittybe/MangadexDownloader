@@ -12,24 +12,26 @@ namespace MangadexDownloader.ContentInfo
     public class ChapterInfo : IChapterInfo
     {
         // private set for json property
+        // all sets is public because this class like form for chapters
 
         [JsonProperty("id")]
-        public int Id { get; private set; }
+        public int Id { get; set; }
         
         
         [JsonProperty("manga_id")]
-        public int MangaId { get; private set; }
+        public int MangaId { get; set; }
 
         
         [JsonProperty("volume")]
-        public string Volume { get; private set; }
+        public string Volume { get; set; }
         
         
         [JsonProperty("chapter")]
-        public string Chapter { get; private set; }
+        public string Chapter { get; set; }
 
         private JArray pageArray;
 
+        
         [JsonProperty("page_array")]
         public JArray PageArray 
         {
@@ -55,11 +57,12 @@ namespace MangadexDownloader.ContentInfo
                 Pages = pages;
             } 
         }
+        
+        
         /// <summary>
         /// all pages
         /// </summary>
-        // this for multi threding parse
-        public List<Page> Pages { get; private set; }
+        public List<Page> Pages { get; set; }
 
         public class Page
         {
@@ -75,20 +78,18 @@ namespace MangadexDownloader.ContentInfo
         }
         
         [JsonProperty("lang_code")]
-        public string LangCode { get; private set; }
+        public string LangCode { get; set; }
 
         
         [JsonProperty("hash")]
-        public string Hash { get; private set; }
+        public string Hash { get; set; }
         
      
         [JsonProperty("server")]
-        public string ServerUrl { get; private set; }
+        public string ServerUrl { get; set; }
 
 
         [JsonProperty("lang_name")]
-        public string LangName { get; private set; }
-
-        
+        public string LangName { get; set; }
     }
 }

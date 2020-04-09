@@ -3,6 +3,7 @@ using AngleSharp.Io;
 using MangadexDownloader.ContentInfo;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -29,8 +30,11 @@ namespace MangadexDownloader.Parsing.ContentParsing
         {
             foreach (var page in chapterInfo.Pages) 
             {
+                string pageUrl = $"{chapterInfo.ServerUrl}/{chapterInfo.Hash}/{page.PageName}";
+                
                 // parse one page
                 ParsePage(page, chapterInfo);
+                Trace.WriteLine($"{DateTime.Now}: page \"{pageUrl}\" has parsed successfully, page number {page.PageNumber}, chapter number: {chapterInfo.Chapter}, volume number: {chapterInfo.Volume}, chapter id: {chapterInfo.Id}");
             }
         }
 
@@ -42,20 +46,28 @@ namespace MangadexDownloader.Parsing.ContentParsing
         protected void ParsePage(ChapterInfo.Page page, IChapterInfo chapterInfo) 
         {
             // page's names have string type
+            
             string pageName = page.PageName;
+
             // local page name and full path to page
+            
             // VOLUMENUMBER_CHAPTERNUMBER_PAGENUMBER
             string localPageName = $"{chapterInfo.Volume}_{chapterInfo.Chapter}_{page.PageNumber}";
             string pageExtension = Path.GetExtension(pageName);
             string fullPath = $"{Dir.FullName}\\{localPageName}{pageExtension}";
 
             // get url to image page
+            
             string pageUrl = $"{chapterInfo.ServerUrl}/{chapterInfo.Hash}/{pageName}";
 
             // make request to server with page
+            
             WebRequest request = WebRequest.Create(pageUrl);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Trace.WriteLine($"{DateTime.Now}: web request has created to this url \"{pageUrl}\", chapter id: {chapterInfo.Id}");
 
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Trace.WriteLine($"{DateTime.Now}: recieve response from \"{pageUrl}\", chapter id: {chapterInfo.Id}");
+            
             // open file
 
             BinaryReader reader = new BinaryReader(response.GetResponseStream());
@@ -66,6 +78,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
             // write content to image file
 
             // size of buffer
+            
             int bufferSize = 1024;
             byte[] buffer;
             while (true) 
@@ -75,8 +88,11 @@ namespace MangadexDownloader.Parsing.ContentParsing
                 if (buffer.Length == 0)
                     break;
             }
+            
             // save writed data
+            
             writer.Flush();
+            Trace.WriteLine($"{DateTime.Now}: page has writed to file \"{fullPath}\", chapter id: {chapterInfo.Id}");
 
             // close all streams
 

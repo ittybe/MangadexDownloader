@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Diagnostics;
 
 namespace MangadexDownloader.Parsing.ContentParsing
 {
@@ -90,7 +91,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
             List<IChapterInfo> chaptersInfo = new List<IChapterInfo>();
             foreach (var chapter in MangaInfo.ShortChaptersInfo) 
             {
-                // check if it s match the request
+                // check if it s match the user's request
                 if (match(chapter)) 
                 {
                     int id = Convert.ToInt32(chapter.Id);

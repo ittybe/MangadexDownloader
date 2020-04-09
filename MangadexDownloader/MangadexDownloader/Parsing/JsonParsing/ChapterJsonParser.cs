@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using System.IO;
+using System.Diagnostics;
 
 namespace MangadexDownloader.Parsing.JsonParsing
 {
@@ -23,13 +24,15 @@ namespace MangadexDownloader.Parsing.JsonParsing
             string urlChapter = $"https://mangadex.org/api/chapter/{id}";
 
             WebRequest request = WebRequest.Create(urlChapter);
-            
+            Trace.WriteLine($"{DateTime.Now}: web request has created to this url \"{urlChapter}\"");
+
             // get server response
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            
+            Trace.WriteLine($"{DateTime.Now}: recieve response from \"{urlChapter}\"");
+
             // Get the stream containing content returned by the server.
             Stream dataStream = response.GetResponseStream();
-            
+
             // Open the stream using a StreamReader for easy access.
             StreamReader reader = new StreamReader(dataStream);
             
@@ -40,6 +43,8 @@ namespace MangadexDownloader.Parsing.JsonParsing
             reader.Close();
             dataStream.Close();
             response.Close();
+
+            Trace.WriteLine($"{DateTime.Now}: parsing json complete successfully, url \"{urlChapter}\"");
             
             return responseFromServer;
         }
@@ -53,6 +58,8 @@ namespace MangadexDownloader.Parsing.JsonParsing
             ChapterInfo chapterInfo = JsonConvert.DeserializeObject<ChapterInfo>(json);
             if (chapterInfo.Volume.CompareTo(string.Empty) == 0)
                 throw new ApplicationException("ChapterInfo json is invalid");
+            if (chapterInfo.Chapter.CompareTo(string.Empty) == 0)
+                chapterInfo.Chapter = "1";
             return chapterInfo;
         }
         /// <summary>

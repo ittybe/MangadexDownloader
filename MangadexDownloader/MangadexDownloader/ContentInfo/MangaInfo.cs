@@ -12,13 +12,13 @@ namespace MangadexDownloader.ContentInfo
         /// manga's cover url
         /// </summary>
         [JsonProperty("cover_url")]
-        public string CoverUrl { get; private set; }
+        public string CoverUrl { get; set; }
         /// <summary>
         /// title of manga
         /// </summary>
         
         [JsonProperty("title")]
-        public string Title { get; private set; }
+        public string Title { get; set; }
 
 
         private JObject chapters;
@@ -32,9 +32,10 @@ namespace MangadexDownloader.ContentInfo
             {
                 return chapters;
             }
-            private set 
+            set 
             {
                 chapters = value;
+                ShortChaptersInfo.Clear();
                 foreach (var chapter in chapters) 
                 {
                     // chapter Value is JToken

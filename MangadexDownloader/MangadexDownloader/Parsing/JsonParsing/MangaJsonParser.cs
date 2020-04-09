@@ -6,6 +6,7 @@ using MangadexDownloader.ContentInfo;
 using Newtonsoft.Json;
 using System.Net;
 using System.IO;
+using System.Diagnostics;
 
 namespace MangadexDownloader.Parsing.JsonParsing
 {
@@ -15,16 +16,17 @@ namespace MangadexDownloader.Parsing.JsonParsing
         /// Get manga json
         /// </summary>
         /// <param name="id">manga's id</param>
-        /// <exception cref="ApplicationException"></exception>
         /// <returns>json string about manga</returns>
         public string GetJson(int id)
         {
-            string urlChapter = $"https://mangadex.org/api/manga/{id}";
+            string urlManga = $"https://mangadex.org/api/manga/{id}";
 
-            WebRequest request = WebRequest.Create(urlChapter);
+            WebRequest request = WebRequest.Create(urlManga);
+            Trace.WriteLine($"{DateTime.Now}: web request has created to this url \"{urlManga}\"");
 
             // get server response
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Trace.WriteLine($"{DateTime.Now}: web request has created to this url \"{urlManga}\"");
 
             // Get the stream containing content returned by the server.
             Stream dataStream = response.GetResponseStream();
@@ -39,6 +41,8 @@ namespace MangadexDownloader.Parsing.JsonParsing
             reader.Close();
             dataStream.Close();
             response.Close();
+
+            Trace.WriteLine($"{DateTime.Now}: parsing json complete successfully, url \"{urlManga}\"");
 
             return responseFromServer;
         }
