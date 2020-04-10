@@ -78,44 +78,46 @@ namespace MangadexDownloader.Parsing.ContentParsing
             
             string pageUrl = $"{chapterInfo.ServerUrl}/{chapterInfo.Hash}/{pageName}";
 
-            // make request to server with page
-            
+
             WebRequest request = WebRequest.Create(pageUrl);
             Trace.WriteLine($"{DateTime.Now}: web request has created to this url \"{pageUrl}\", chapter id: {chapterInfo.Id}");
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Trace.WriteLine($"{DateTime.Now}: recieve response from \"{pageUrl}\", chapter id: {chapterInfo.Id}");
-            
-            // open file
 
+            // open file
             BinaryReader reader = new BinaryReader(response.GetResponseStream());
 
             FileStream fileStream = File.OpenWrite(fullPath);
             BinaryWriter writer = new BinaryWriter(fileStream);
 
-            // write content to image file
-
-            // size of buffer
-            
-            int bufferSize = 1024;
-            byte[] buffer;
-            while (true) 
+            // make request to server containing pages, 
+            try
             {
-                buffer = reader.ReadBytes(bufferSize);
-                writer.Write(buffer);
-                if (buffer.Length == 0)
-                    break;
+                // write content to image file
+
+                int bufferSize = 1024;
+                byte[] buffer;
+                while (true)
+                {
+                    buffer = reader.ReadBytes(bufferSize);
+                    writer.Write(buffer);
+                    if (buffer.Length == 0)
+                        break;
+                }
+
+                // save writed data
+
+                writer.Flush();
+                Trace.WriteLine($"{DateTime.Now}: page has writed to file \"{fullPath}\", chapter id: {chapterInfo.Id}");
             }
-            
-            // save writed data
-            
-            writer.Flush();
-            Trace.WriteLine($"{DateTime.Now}: page has writed to file \"{fullPath}\", chapter id: {chapterInfo.Id}");
+            finally
+            {
+                // close all streams
 
-            // close all streams
-
-            writer.Close();
-            reader.Close();
+                writer.Close();
+                reader.Close();
+            }
         }
     }
 }
