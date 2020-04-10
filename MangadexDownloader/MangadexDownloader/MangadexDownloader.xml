@@ -484,7 +484,6 @@
             Get chapter json
             </summary>
             <param name="id">chapter's id</param>
-            <exception cref="T:System.ApplicationException"></exception>
             <returns>json string about chapter</returns>
         </member>
         <member name="M:MangadexDownloader.Parsing.JsonParsing.ChapterJsonParser.ConvertJson(System.String)">

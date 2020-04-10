@@ -71,7 +71,8 @@ namespace MangadexDownloader.Parsing.ContentParsing
             // VOLUMENUMBER_CHAPTERNUMBER_PAGENUMBER
             string localPageName = $"{chapterInfo.Volume}_{chapterInfo.Chapter}_{page.PageNumber}";
             string pageExtension = Path.GetExtension(pageName);
-            string fullPath = $"{Dir.FullName}\\{localPageName}{pageExtension}";
+            char dirSeparatorChar = Path.DirectorySeparatorChar;
+            string fullPath = $"{Dir.FullName}{dirSeparatorChar}{localPageName}{pageExtension}";
 
             // get url to image page
             

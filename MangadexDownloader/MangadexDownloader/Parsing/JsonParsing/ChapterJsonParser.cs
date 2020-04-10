@@ -17,7 +17,6 @@ namespace MangadexDownloader.Parsing.JsonParsing
         /// Get chapter json
         /// </summary>
         /// <param name="id">chapter's id</param>
-        /// <exception cref="ApplicationException"></exception>
         /// <returns>json string about chapter</returns>
         public string GetJson(int id)
         {

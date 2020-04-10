@@ -7,6 +7,7 @@ using iText.Layout.Properties;
 using MangadexDownloader.ContentInfo;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -46,8 +47,8 @@ namespace MangadexDownloader.ContentCollecting
             foreach (var page in pages)
             {
                 // read image 
-
-                string inputImagePath = $@"{Dir.FullName}\{page.Fullname}";
+                char dirSeparatorChar = System.IO.Path.DirectorySeparatorChar;  // Path already exists in itext7
+                string inputImagePath = $"{Dir.FullName}{dirSeparatorChar}{page.Fullname}";
                 ImageData imageData = ImageDataFactory.Create(inputImagePath);
 
                 // page size equals image size
@@ -62,6 +63,7 @@ namespace MangadexDownloader.ContentCollecting
 
                 imagesData.Add(imageData);
             }
+            Trace.WriteLine($"{DateTime.Now}: pdf document empty pages has created, pages = {pages.Count}, path \"{outputPath}\"");
             // document 
             Document document = new Document(pdfDocument);
             foreach (var imageData in imagesData)
@@ -82,10 +84,13 @@ namespace MangadexDownloader.ContentCollecting
 
                 document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
             }
+            Trace.WriteLine($"{DateTime.Now}: pdf document pages has filled with images, imagesData = {imagesData.Count}, path \"{outputPath}\"");
+
             if (pdfDocument.GetNumberOfPages() > 0)
             {
                 pdfDocument.Close();
             }
+            Trace.WriteLine($"{DateTime.Now}: pdf document saved successfully, path \"{outputPath}\"");
         }
 
         /// <summary>
