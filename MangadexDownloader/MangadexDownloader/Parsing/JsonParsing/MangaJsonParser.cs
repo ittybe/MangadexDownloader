@@ -26,7 +26,7 @@ namespace MangadexDownloader.Parsing.JsonParsing
 
             // get server response
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Trace.WriteLine($"{DateTime.Now}: web request has created to this url \"{urlManga}\"");
+            Trace.WriteLine($"{DateTime.Now}: recieve response from \"{urlManga}\"");
 
             // Get the stream containing content returned by the server.
             Stream dataStream = response.GetResponseStream();

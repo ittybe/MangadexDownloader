@@ -259,6 +259,105 @@
             lang Code of this chapter
             </summary>
         </member>
+        <member name="T:MangadexDownloader.Downloading.IMangaDownloader">
+            <summary>
+            interface for MangaDownloader
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Downloading.IMangaDownloader.Dir">
+            <summary>
+            Temp Dir for pages
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.IMangaDownloader.SetTempDir">
+            <summary>
+            set temp dir for Dir, 
+            Generate name for directory and then Creates directory in system Temp dir
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Downloading.IMangaDownloader.MangaParser">
+            <summary>
+            manga parser for parsing chapters
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.IMangaDownloader.Parse(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo},System.Int32)">
+            <summary>
+            parse chapter's pages into Dir
+            </summary>
+            <param name="match">match for parsing chapters</param>
+            <param name="numberOfTry">number of try (if while page parsing something gone wrong it will try to parse this again this amount of time)</param>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.IMangaDownloader.SetMangaToParse(System.Int32)">
+            <summary>
+            set manga to parse by manga's id
+            </summary>
+            <param name="id">id of manga</param>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.IMangaDownloader.CollectContentToPdf(System.String)">
+            <summary>
+            collect all pages to pdf format
+            </summary>
+            <param name="outputPath">output file path</param>
+        </member>
+        <member name="T:MangadexDownloader.Downloading.MangaDownloader">
+            <summary>
+            Download manga and convert it to pdf
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.MangaDownloader.#ctor(System.Int32,System.IO.DirectoryInfo)">
+            <summary>
+            
+            </summary>
+            <param name="id">manga's id</param>
+            <param name="dir">temp directory</param>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.MangaDownloader.#ctor(MangadexDownloader.Parsing.ContentParsing.IMangaParser)">
+            <summary>
+            if you already have parser
+            </summary>
+            <param name="parser">parser </param>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.MangaDownloader.#ctor(System.Int32)">
+            <summary>
+            create random temp directory in system temp dir and set manga by id
+            </summary>
+            <param name="id">manga's id</param>
+        </member>
+        <member name="P:MangadexDownloader.Downloading.MangaDownloader.Dir">
+            <summary>
+            Temp Dir for pages
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Downloading.MangaDownloader.MangaParser">
+            <summary>
+            manga parser for parsing chapters
+            </summary>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.MangaDownloader.CollectContentToPdf(System.String)">
+            <summary>
+            collect all pages to pdf format
+            </summary>
+            <param name="outputPath">output file path</param>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.MangaDownloader.Parse(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo},System.Int32)">
+            <summary>
+            parse chapter's pages into Dir
+            </summary>
+            <param name="match">match for parsing chapters</param>
+            <param name="numberOfTry">number of try (if while page parsing something gone wrong it will try to parse this again this amount of time)</param>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.MangaDownloader.SetMangaToParse(System.Int32)">
+            <summary>
+            set manga to parse by manga's id
+            </summary>
+            <param name="id">id of manga</param>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.MangaDownloader.SetTempDir">
+            <summary>
+            set temp dir for Dir, 
+            Generate name for directory and then Creates directory in system Temp dir
+            </summary>
+        </member>
         <member name="F:MangadexDownloader.Parsing.ContentParsing.ChapterParser.Pattern">
             <summary>
             pattern to file naming
