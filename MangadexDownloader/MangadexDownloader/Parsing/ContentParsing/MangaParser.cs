@@ -58,26 +58,28 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// parse chapter's pages into Dir
         /// </summary>
         /// <param name="match">match for parsing chapters</param>
-        public void Parse(Predicate<ShortChapterInfo> match)
+        /// <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time, for chapter parser</param>
+        public void Parse(Predicate<ShortChapterInfo> match, int numberOfTry)
         {
             // parse info into List<IChapterInfo>
             ChaptersInfo = ParseChaptersInfo(match);
             
             // always true , because we already get chapters we needed
-            ParseChapters(chapter => true);
+            ParseChapters(chapter => true, numberOfTry);
         }
 
         /// <summary>
         /// parse all chapters in ChaptersInfo
         /// </summary>
         /// <param name="match">predicate for chapters</param>
-        protected void ParseChapters(Predicate<IChapterInfo>match)
+        /// <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time, for chapter parser</param>
+        protected void ParseChapters(Predicate<IChapterInfo>match, int numberOfTry)
         {
             IChapterParser chapterParser = new ChapterParser(Dir);
 
             foreach (var chapter in ChaptersInfo)
             {
-                chapterParser.Parse(chapter);
+                chapterParser.Parse(chapter, numberOfTry);
             }
         }
         

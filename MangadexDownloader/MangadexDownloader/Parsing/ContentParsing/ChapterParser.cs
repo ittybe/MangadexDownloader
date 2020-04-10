@@ -26,15 +26,32 @@ namespace MangadexDownloader.Parsing.ContentParsing
             Dir = dir;
         }
 
-        public void Parse(IChapterInfo chapterInfo)
+        public void Parse(IChapterInfo chapterInfo, int numberOfTry)
         {
             foreach (var page in chapterInfo.Pages) 
             {
                 string pageUrl = $"{chapterInfo.ServerUrl}/{chapterInfo.Hash}/{page.PageName}";
+
+                // parse try number of try
+                for (int i = 0; i < numberOfTry; i++)
+                {
+                    // parse one page
+                    try
+                    {
+                        ParsePage(page, chapterInfo);
+                        Trace.WriteLine($"{DateTime.Now}: page \"{pageUrl}\" has parsed successfully, page number {page.PageNumber}, chapter number: {chapterInfo.Chapter}, volume number: {chapterInfo.Volume}, chapter id: {chapterInfo.Id}");
+                        break;
+                    }
+                    catch (Exception exc)
+                    {
+                        Trace.WriteLine($"{DateTime.Now}: FAIL page \"{pageUrl}\" has parsed unsuccessfully, page number {page.PageNumber}, chapter number: {chapterInfo.Chapter}, volume number: {chapterInfo.Volume}, chapter id: {chapterInfo.Id}, \n{exc.Message}{exc.StackTrace}\n");
+                        
+                        // if numberOfTry is already passed then we will throw exception
+                        if (i + 1 == numberOfTry)
+                            throw;
+                    }
+                }
                 
-                // parse one page
-                ParsePage(page, chapterInfo);
-                Trace.WriteLine($"{DateTime.Now}: page \"{pageUrl}\" has parsed successfully, page number {page.PageNumber}, chapter number: {chapterInfo.Chapter}, volume number: {chapterInfo.Volume}, chapter id: {chapterInfo.Id}");
             }
         }
 

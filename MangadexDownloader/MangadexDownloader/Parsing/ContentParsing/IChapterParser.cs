@@ -19,6 +19,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// parse pages into directory
         /// </summary>
         /// <param name="chapterInfo">chapterInfo for parsing</param>
-        void Parse(IChapterInfo chapterInfo);
+        /// <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time</param>
+        void Parse(IChapterInfo chapterInfo, int numberOfTry);
     }
 }
