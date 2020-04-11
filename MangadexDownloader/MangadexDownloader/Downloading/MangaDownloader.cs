@@ -21,8 +21,8 @@ namespace MangadexDownloader.Downloading
         /// <param name="dir">temp directory</param>
         public MangaDownloader(int id, DirectoryInfo dir) 
         {
-            SetMangaToParse(id);
             Dir = dir;
+            SetMangaToParse(id);
         }
         /// <summary>
         /// if you already have parser
@@ -72,6 +72,7 @@ namespace MangadexDownloader.Downloading
         /// <param name="numberOfTry">number of try (if while page parsing something gone wrong it will try to parse this again this amount of time)</param>
         public void Parse(Predicate<ShortChapterInfo> match, int numberOfTry)
         {
+            MangaParser.Dir = Dir;
             MangaParser.Parse(match, numberOfTry);
         }
 
