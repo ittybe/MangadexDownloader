@@ -45,13 +45,17 @@ namespace MangadexDownloader.Parsing.ContentParsing
                     try
                     {
                         ParsePage(page, chapterInfo);
+#if DEBUG
                         Trace.WriteLine($"{DateTime.Now}: page \"{pageUrl}\" has parsed successfully, page number {page.PageNumber}, chapter number: {chapterInfo.Chapter}, volume number: {chapterInfo.Volume}, chapter id: {chapterInfo.Id}");
+#endif
                         break;
                     }
                     catch (Exception exc)
                     {
+#if DEBUG
                         Trace.WriteLine($"{DateTime.Now}: FAIL page \"{pageUrl}\" has parsed unsuccessfully, page number {page.PageNumber}, chapter number: {chapterInfo.Chapter}, volume number: {chapterInfo.Volume}, chapter id: {chapterInfo.Id}, \n{exc.Message}{exc.StackTrace}\n");
-                        
+#endif
+
                         // if numberOfTry is already passed then we will throw exception
                         if (i + 1 == numberOfTry)
                             throw;
@@ -85,10 +89,14 @@ namespace MangadexDownloader.Parsing.ContentParsing
 
 
             WebRequest request = WebRequest.Create(pageUrl);
+#if DEBUG
             Trace.WriteLine($"{DateTime.Now}: web request has created to this url \"{pageUrl}\", chapter id: {chapterInfo.Id}");
+#endif
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+#if DEBUG
             Trace.WriteLine($"{DateTime.Now}: recieve response from \"{pageUrl}\", chapter id: {chapterInfo.Id}");
+#endif
 
             // open file
             BinaryReader reader = new BinaryReader(response.GetResponseStream());
@@ -114,7 +122,9 @@ namespace MangadexDownloader.Parsing.ContentParsing
                 // save writed data
 
                 writer.Flush();
+#if DEBUG
                 Trace.WriteLine($"{DateTime.Now}: page has writed to file \"{fullPath}\", chapter id: {chapterInfo.Id}");
+#endif
             }
             finally
             {

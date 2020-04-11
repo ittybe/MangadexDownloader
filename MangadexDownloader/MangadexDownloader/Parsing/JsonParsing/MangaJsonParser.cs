@@ -22,11 +22,14 @@ namespace MangadexDownloader.Parsing.JsonParsing
             string urlManga = $"https://mangadex.org/api/manga/{id}";
 
             WebRequest request = WebRequest.Create(urlManga);
+#if DEBUG
             Trace.WriteLine($"{DateTime.Now}: web request has created to this url \"{urlManga}\"");
-
+#endif
             // get server response
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+#if DEBUG
             Trace.WriteLine($"{DateTime.Now}: recieve response from \"{urlManga}\"");
+#endif
 
             // Get the stream containing content returned by the server.
             Stream dataStream = response.GetResponseStream();
@@ -39,7 +42,9 @@ namespace MangadexDownloader.Parsing.JsonParsing
             {
                 // Read the content. (json object)
                 responseFromServer = reader.ReadToEnd();
+#if DEBUG
                 Trace.WriteLine($"{DateTime.Now}: parsing json complete successfully, url \"{urlManga}\"");
+#endif
             }
             finally
             {
