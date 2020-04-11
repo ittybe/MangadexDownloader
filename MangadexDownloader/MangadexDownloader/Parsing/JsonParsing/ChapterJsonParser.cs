@@ -34,16 +34,21 @@ namespace MangadexDownloader.Parsing.JsonParsing
 
             // Open the stream using a StreamReader for easy access.
             StreamReader reader = new StreamReader(dataStream);
-            
-            // Read the content. (json object)
-            string responseFromServer = reader.ReadToEnd();
-            
-            // close all streams
-            reader.Close();
-            dataStream.Close();
-            response.Close();
 
-            Trace.WriteLine($"{DateTime.Now}: parsing json complete successfully, url \"{urlChapter}\"");
+            string responseFromServer;
+            try
+            {
+                // Read the content. (json object)
+                responseFromServer = reader.ReadToEnd();
+                Trace.WriteLine($"{DateTime.Now}: parsing json complete successfully, url \"{urlChapter}\"");
+            }
+            finally
+            {
+                // close all streams
+                reader.Close();
+                dataStream.Close();
+                response.Close();
+            }
             
             return responseFromServer;
         }

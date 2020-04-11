@@ -365,6 +365,13 @@
             VOLUMENUMBER_CHAPTERNUMBER_PAGENUMBER.EXTENTION;
             </summary>
         </member>
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.ChapterParser.Parse(MangadexDownloader.ContentInfo.IChapterInfo,System.Int32)">
+            <summary>
+            parse pages into directory
+            </summary>
+            <param name="chapterInfo">chapterInfo for parsing</param>
+            <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time</param>
+        </member>
         <member name="M:MangadexDownloader.Parsing.ContentParsing.ChapterParser.ParsePage(MangadexDownloader.ContentInfo.ChapterInfo.Page,MangadexDownloader.ContentInfo.IChapterInfo)">
             <summary>
             parse page 
@@ -459,11 +466,10 @@
             <param name="match">match for parsing chapters</param>
             <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time, for chapter parser</param>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChapters(System.Predicate{MangadexDownloader.ContentInfo.IChapterInfo},System.Int32)">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChapters(System.Int32)">
             <summary>
             parse all chapters in ChaptersInfo
             </summary>
-            <param name="match">predicate for chapters</param>
             <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time, for chapter parser</param>
         </member>
         <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
@@ -472,7 +478,7 @@
             </summary>
             <param name="match">predicate for chapters</param>
         </member>
-        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfoMultiThreading(System.Int32,System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo})">
+        <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.ParseChaptersInfo(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo},System.Int32)">
             <summary>
             paralell parse chapters info
             </summary>

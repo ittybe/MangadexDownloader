@@ -65,15 +65,14 @@ namespace MangadexDownloader.Parsing.ContentParsing
             ChaptersInfo = ParseChaptersInfo(match);
             
             // always true , because we already get chapters we needed
-            ParseChapters(chapter => true, numberOfTry);
+            ParseChapters(numberOfTry);
         }
 
         /// <summary>
         /// parse all chapters in ChaptersInfo
         /// </summary>
-        /// <param name="match">predicate for chapters</param>
         /// <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time, for chapter parser</param>
-        protected void ParseChapters(Predicate<IChapterInfo>match, int numberOfTry)
+        protected void ParseChapters(int numberOfTry)
         {
             IChapterParser chapterParser = new ChapterParser(Dir);
 
@@ -109,7 +108,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// </summary>
         /// <param name="threadsNumber">how many threads is running at the same time</param>
         /// <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
-        protected void ParseChaptersInfoMultiThreading(int threadsNumber, Predicate<ShortChapterInfo> match)
+        protected void ParseChaptersInfo(Predicate<ShortChapterInfo> match, int threadsNumber) 
         {
             IChapterJsonParser jsonParser = new ChapterJsonParser();
             Thread[] threads = new Thread[threadsNumber];
@@ -121,7 +120,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
                 if (match(chapter))
                 {
                     // we use post increament so we just compare this values
-                    if (threadsIndex == threadsNumber) 
+                    if (threadsIndex == threadsNumber)
                     {
                         threadsIndex = 0;
                         // start threads
@@ -139,7 +138,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
                     ThreadStart parseFunc = () =>
                     {
                         // wait for calling thread wait for end of the parsing
-                        
+
 
                         // parse data from site
                         var chapterLocal = chapter;
@@ -165,7 +164,6 @@ namespace MangadexDownloader.Parsing.ContentParsing
                     threads[i].Join();
                 }
             }
-
         }
     }
 }

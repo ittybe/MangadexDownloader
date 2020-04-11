@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 
 namespace MangadexDownloader.Parsing.ContentParsing
 {
@@ -25,7 +26,12 @@ namespace MangadexDownloader.Parsing.ContentParsing
         {
             Dir = dir;
         }
-
+        
+        /// <summary>
+        /// parse pages into directory
+        /// </summary>
+        /// <param name="chapterInfo">chapterInfo for parsing</param>
+        /// <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time</param>
         public void Parse(IChapterInfo chapterInfo, int numberOfTry)
         {
             foreach (var page in chapterInfo.Pages) 
@@ -51,7 +57,6 @@ namespace MangadexDownloader.Parsing.ContentParsing
                             throw;
                     }
                 }
-                
             }
         }
 
@@ -117,6 +122,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
 
                 writer.Close();
                 reader.Close();
+                response.Close();
             }
         }
     }
