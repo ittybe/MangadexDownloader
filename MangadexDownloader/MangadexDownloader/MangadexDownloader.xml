@@ -21,6 +21,14 @@
             </summary>
             <param name="outputPath">pdf file output</param>
         </member>
+        <member name="M:MangadexDownloader.ContentCollecting.ContentCollector.CreateLinkToPage(System.Int32,System.String)">
+            <summary>
+            creates link to specific page
+            </summary>
+            <param name="pageIndex">page index</param>
+            <param name="textLink">text link</param>
+            <returns>paragraph link</returns>
+        </member>
         <member name="M:MangadexDownloader.ContentCollecting.ContentCollector.GetPagesInfo">
             <summary>
             get pages info from Dir
