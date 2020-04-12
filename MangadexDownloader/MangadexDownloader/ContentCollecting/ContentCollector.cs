@@ -91,7 +91,7 @@ namespace MangadexDownloader.ContentCollecting
             pdfDocument.AddNewPage(1, PageSize.A4);
             document = new Document(pdfDocument);
             
-            Paragraph p = new Paragraph("Content").SetFontSize(80);
+            Paragraph p = new Paragraph("Content").SetFontSize(60);
 
             document.Add(p);
 
@@ -156,7 +156,8 @@ namespace MangadexDownloader.ContentCollecting
         {
             IRenderer paragraphRenderer = p.CreateRendererSubTree();
             LayoutResult result = paragraphRenderer.SetParent(document.GetRenderer()).
-                                    Layout(new LayoutContext(new LayoutArea(pageIndex, PageSize.A4)));
+                                    Layout(new LayoutContext(new LayoutArea(pageIndex, new Rectangle(100, 1000))));
+            //document.GetPageEffectiveArea(PageSize.A4))
             return result.GetOccupiedArea();
         }
 
