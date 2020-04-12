@@ -1,4 +1,5 @@
 ﻿using iText.IO.Font;
+using iText.IO.Font.Otf;
 using iText.IO.Image;
 using iText.Kernel.Font;
 using iText.Kernel.Geom;
@@ -91,7 +92,7 @@ namespace MangadexDownloader.ContentCollecting
             pdfDocument.AddNewPage(1, PageSize.A4);
             document = new Document(pdfDocument);
             
-            Paragraph p = new Paragraph("Content").SetFontSize(60);
+            Paragraph p = new Paragraph("Content").SetFontSize(50);
 
             document.Add(p);
 
@@ -121,8 +122,9 @@ namespace MangadexDownloader.ContentCollecting
 
                 // calc height of paragraph
 
-                var area = GetParagraphArea(p, pageIndex);
-                float heightParagraph = area.GetBBox().GetHeight();
+                //var area = GetParagraphArea(p, pageIndex);
+                var rec = GetTextSize(textLink, FontConstants.HELVETICA, 30);
+                float heightParagraph = rec.GetHeight();
 
 
                 // then check is paragraph out of Work area?
@@ -152,8 +154,30 @@ namespace MangadexDownloader.ContentCollecting
 #endif
         }
 
+        protected Rectangle GetTextSize(string text, string fontName, int fontSize) 
+        {
+            PdfFont pdfFont = PdfFontFactory.CreateFont(fontName);
+            GlyphLine glyphLine = pdfFont.CreateGlyphLine(text);
+
+            int width = 0;
+            for (int i = 0; i < glyphLine.Size(); i++)
+            {
+                Glyph glyph = glyphLine.Get(i);
+                width += glyph.GetWidth();
+            }
+
+            float userSpaceWidth = width * fontSize / 1000.0f;
+
+            float ascent = pdfFont.GetAscent(text, fontSize);
+            float descent = pdfFont.GetDescent(text, fontSize);
+
+            float userSpaceHeight = ascent - descent;
+            return new Rectangle(userSpaceWidth, userSpaceHeight);
+        }
         protected LayoutArea GetParagraphArea(Paragraph p, int pageIndex) 
         {
+            
+
             IRenderer paragraphRenderer = p.CreateRendererSubTree();
             LayoutResult result = paragraphRenderer.SetParent(document.GetRenderer()).
                                     Layout(new LayoutContext(new LayoutArea(pageIndex, new Rectangle(100, 1000))));
