@@ -21,6 +21,16 @@
             </summary>
             <param name="outputPath">pdf file output</param>
         </member>
+        <member name="M:MangadexDownloader.ContentCollecting.ContentCollector.CollectContentToPdf(System.String,iText.Kernel.Font.PdfFont,System.Single,System.Single,iText.Kernel.Geom.PageSize)">
+            <summary>
+            collect all pages to pdf format, also make table of content in pdf file
+            </summary>
+            <param name="outputPath">output file path</param>
+            <param name="font">font for table of content</param>
+            <param name="fontSizeInfo">size of information text</param>
+            <param name="fontSizeHeader">size of header text</param>
+            <param name="pageSize">page size of information and table of content</param>
+        </member>
         <member name="M:MangadexDownloader.ContentCollecting.ContentCollector.CreateLinkToPage(System.Int32,System.String)">
             <summary>
             creates link to specific page
@@ -45,6 +55,16 @@
             collect all pages to pdf format
             </summary>
             <param name="outputPath">output file path</param>
+        </member>
+        <member name="M:MangadexDownloader.ContentCollecting.IContentCollector.CollectContentToPdf(System.String,iText.Kernel.Font.PdfFont,System.Single,System.Single,iText.Kernel.Geom.PageSize)">
+            <summary>
+            collect all pages to pdf format, also make table of content in pdf file
+            </summary>
+            <param name="outputPath">output file path</param>
+            <param name="font">font for table of content</param>
+            <param name="fontSizeInfo">size of information text</param>
+            <param name="fontSizeHeader">size of header text</param>
+            <param name="pageSize">page size of information and table of content</param>
         </member>
         <member name="T:MangadexDownloader.ContentCollecting.PageInfo">
             <summary>
@@ -307,6 +327,16 @@
             </summary>
             <param name="outputPath">output file path</param>
         </member>
+        <member name="M:MangadexDownloader.Downloading.IMangaDownloader.CollectContentToPdf(System.String,iText.Kernel.Font.PdfFont,System.Single,System.Single,iText.Kernel.Geom.PageSize)">
+            <summary>
+            collect all pages to pdf format, also make table of content in pdf file
+            </summary>
+            <param name="outputPath">output file path</param>
+            <param name="font">font for table of content</param>
+            <param name="fontSizeInfo">size of information text</param>
+            <param name="fontSizeHeader">size of header text</param>
+            <param name="pageSize">page size of information and table of content</param>
+        </member>
         <member name="T:MangadexDownloader.Downloading.MangaDownloader">
             <summary>
             Download manga and convert it to pdf
@@ -346,6 +376,16 @@
             collect all pages to pdf format
             </summary>
             <param name="outputPath">output file path</param>
+        </member>
+        <member name="M:MangadexDownloader.Downloading.MangaDownloader.CollectContentToPdf(System.String,iText.Kernel.Font.PdfFont,System.Single,System.Single,iText.Kernel.Geom.PageSize)">
+            <summary>
+            collect all pages to pdf format, also make table of content in pdf file
+            </summary>
+            <param name="outputPath">output file path</param>
+            <param name="font">font for table of content</param>
+            <param name="fontSizeInfo">size of information text</param>
+            <param name="fontSizeHeader">size of header text</param>
+            <param name="pageSize">page size of information and table of content</param>
         </member>
         <member name="M:MangadexDownloader.Downloading.MangaDownloader.Parse(System.Predicate{MangadexDownloader.ContentInfo.ShortChapterInfo},System.Int32)">
             <summary>

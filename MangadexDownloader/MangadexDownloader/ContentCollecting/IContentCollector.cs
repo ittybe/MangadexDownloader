@@ -1,4 +1,6 @@
-﻿using MangadexDownloader.ContentInfo;
+﻿using iText.Kernel.Font;
+using iText.Kernel.Geom;
+using MangadexDownloader.ContentInfo;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,5 +34,15 @@ namespace MangadexDownloader.ContentCollecting
         /// </summary>
         /// <param name="outputPath">output file path</param>
         void CollectContentToPdf(string outputPath);
+
+        /// <summary>
+        /// collect all pages to pdf format, also make table of content in pdf file
+        /// </summary>
+        /// <param name="outputPath">output file path</param>
+        /// <param name="font">font for table of content</param>
+        /// <param name="fontSizeInfo">size of information text</param>
+        /// <param name="fontSizeHeader">size of header text</param>
+        /// <param name="pageSize">page size of information and table of content</param>
+        void CollectContentToPdf(string outputPath, PdfFont font, float fontSizeInfo, float fontSizeHeader, PageSize pageSize);
     }
 }

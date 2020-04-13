@@ -54,13 +54,57 @@ namespace MangadexDownloader.ContentCollecting
             pdfDocument = new PdfDocument(new PdfWriter(outputPath));
             document = new Document(pdfDocument);
 
-            List<int> beginChaptersInfo = new List<int>();
-            List<PageInfo> pagesInfo = new List<PageInfo>();
-            string prevChapter = "";
             int pageIndex = 1;
             
             // create pdf file from pages
            
+            foreach (var page in pages)
+            {
+                // ADD PAGE IMAGE SHAPE 
+
+                AddPageWithImageShape(page, pageIndex++);
+
+                // ADD IMAGE PAGE
+
+                SetImageToPage(page);
+            }
+            // save pdf file
+            if (pdfDocument.GetNumberOfPages() > 0)
+            {
+                pdfDocument.Close();
+            }
+#if DEBUG
+            Trace.WriteLine($"{DateTime.Now}: pdf document saved successfully, path \"{outputPath}\"");
+#endif
+        }
+
+        /// <summary>
+        /// collect all pages to pdf format, also make table of content in pdf file
+        /// </summary>
+        /// <param name="outputPath">output file path</param>
+        /// <param name="font">font for table of content</param>
+        /// <param name="fontSizeInfo">size of information text</param>
+        /// <param name="fontSizeHeader">size of header text</param>
+        /// <param name="pageSize">page size of information and table of content</param>
+        public void CollectContentToPdf(string outputPath, PdfFont font, float fontSizeInfo, float fontSizeHeader, PageSize pageSize)
+        {
+            // get pages info from Dir
+            var pages = GetPagesInfo();
+
+            // sort pages by volume chapter and page number
+            // using default comparer in page info
+            pages.Sort();
+
+            pdfDocument = new PdfDocument(new PdfWriter(outputPath));
+            document = new Document(pdfDocument);
+
+            List<int> beginChaptersInfo = new List<int>();
+            List<PageInfo> pagesInfo = new List<PageInfo>();
+            string prevChapter = "";
+            int pageIndex = 1;
+
+            // create pdf file from pages
+
             foreach (var page in pages)
             {
                 //// ADD INFO CHAPTER PAGE
@@ -69,7 +113,7 @@ namespace MangadexDownloader.ContentCollecting
                 {
                     prevChapter = page.ChapterNumber;
 
-                    AddBeginChapterInfo(page, 80, 40, pageIndex++);
+                    AddBeginChapterInfo(page, font, fontSizeHeader, fontSizeInfo, pageIndex++, pageSize);
 
                     // number of page is last page index of this pdf
                     beginChaptersInfo.Add(pdfDocument.GetNumberOfPages());
@@ -88,22 +132,26 @@ namespace MangadexDownloader.ContentCollecting
             }
 
             // create link to every chapter begin content 
-            
-            pdfDocument.AddNewPage(1, PageSize.A4);
+
+            // for page index, first page we already created, then we will create second
+            pageIndex = 1;
+
+            pdfDocument.AddNewPage(pageIndex, pageSize);
             document = new Document(pdfDocument);
-            
-            Paragraph p = new Paragraph("Content").SetFontSize(50);
+
+            Paragraph p = new Paragraph("Table of content").SetFont(font).SetFontSize(fontSizeHeader);
 
             document.Add(p);
 
             // get height tmp is for wrap text on next new page
             float heightTmp = document.GetTopMargin();
-            
+
             // page Effective Area 
-            var pageEffectiveArea = document.GetPageEffectiveArea(PageSize.A4);
-            
-            // for page index, first page we already created, then we will create second
-            pageIndex = 1;
+            var pageEffectiveArea = document.GetPageEffectiveArea(pageSize);
+
+            // space between paragraphs
+            float multiLeadingValue = 2f;
+
             for (int i = 0; i < pagesInfo.Count; i++)
             {
                 // get info 
@@ -112,30 +160,37 @@ namespace MangadexDownloader.ContentCollecting
                 int index = beginChaptersInfo[i];
 
                 string textLink = $"Volume {page.VolumeNumber}, Chapter {page.ChapterNumber}: page number {index}";
-                 
+
 
                 // create link and set margin of link
-                
+
                 p = CreateLinkToPage(index, textLink);
                 p.SetMarginLeft(30);
+                p.SetMultipliedLeading(multiLeadingValue);
 
+                // set font and size
+                p.SetFont(font);
+                p.SetFontSize(fontSizeInfo);
 
                 // calc height of paragraph
 
                 //var area = GetParagraphArea(p, pageIndex);
-                var rec = GetTextSize(textLink, FontConstants.HELVETICA, 30);
+                var rec = GetTextSize(textLink, font, fontSizeInfo);
                 float heightParagraph = rec.GetHeight();
 
+                // then check is paragraph out of Work area
 
-                // then check is paragraph out of Work area?
-
-                heightTmp += heightParagraph;
-                // if yes we create new page 
-                if (heightTmp > pageEffectiveArea.GetHeight()) 
+                heightTmp += heightParagraph + (heightParagraph * multiLeadingValue);  // * 2 up and down space
+                // Console.WriteLine($"heightTmp = {heightTmp}, pageEffectiveArea.GetHeight() = {pageEffectiveArea.GetHeight()}");
+                
+                // if yes we create new page
+                if (heightTmp >= pageEffectiveArea.GetHeight())
                 {
                     pageIndex++;
-                    pdfDocument.AddNewPage(pageIndex, PageSize.A4);
-                    document.Add(new AreaBreak());
+
+                    pdfDocument.AddNewPage(pageIndex, pageSize);
+                    document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
+
                     heightTmp = document.GetTopMargin();
 #if DEBUG
                     Trace.WriteLine($"{DateTime.Now}: new page content has created, pageIndex: {pageIndex}");
@@ -147,6 +202,7 @@ namespace MangadexDownloader.ContentCollecting
             // save pdf file
             if (pdfDocument.GetNumberOfPages() > 0)
             {
+                document.Close();
                 pdfDocument.Close();
             }
 #if DEBUG
@@ -154,9 +210,9 @@ namespace MangadexDownloader.ContentCollecting
 #endif
         }
 
-        protected Rectangle GetTextSize(string text, string fontName, int fontSize) 
+
+        protected Rectangle GetTextSize(string text, PdfFont pdfFont, float fontSize) 
         {
-            PdfFont pdfFont = PdfFontFactory.CreateFont(fontName);
             GlyphLine glyphLine = pdfFont.CreateGlyphLine(text);
 
             int width = 0;
@@ -174,14 +230,13 @@ namespace MangadexDownloader.ContentCollecting
             float userSpaceHeight = ascent - descent;
             return new Rectangle(userSpaceWidth, userSpaceHeight);
         }
+
         protected LayoutArea GetParagraphArea(Paragraph p, int pageIndex) 
         {
-            
-
             IRenderer paragraphRenderer = p.CreateRendererSubTree();
             LayoutResult result = paragraphRenderer.SetParent(document.GetRenderer()).
                                     Layout(new LayoutContext(new LayoutArea(pageIndex, new Rectangle(100, 1000))));
-            //document.GetPageEffectiveArea(PageSize.A4))
+            
             return result.GetOccupiedArea();
         }
 
@@ -199,18 +254,17 @@ namespace MangadexDownloader.ContentCollecting
             //PdfDestination dest = PdfDestination.MakeDestination(array);
             PdfExplicitDestination dest = PdfExplicitDestination.CreateFit(pdfDocument.GetPage(pageIndex));
             Paragraph link = new Paragraph(new Link(textLink, PdfAction.CreateGoTo(dest)));
-
             return link;
         }
 
-        private void AddBeginChapterInfo(PageInfo page, float volumeFontSize, float chapterFontSize, int pageIndex)
+        private void AddBeginChapterInfo(PageInfo page, PdfFont font, float volumeFontSize, float chapterFontSize, int pageIndex, PageSize pageSize)
         {
             // add PageSize A4
-            pdfDocument.AddNewPage(pageIndex,PageSize.A4);
-            PageSize pageSize = PageSize.A4;
+            pdfDocument.AddNewPage(pageIndex, pageSize);
 
             // add Volume info
             Paragraph volumeInfo = new Paragraph($"Volume {page.VolumeNumber}");
+            volumeInfo.SetFont(font);
             volumeInfo.SetTextAlignment(TextAlignment.CENTER);
             volumeInfo.SetFontSize(volumeFontSize);
 
@@ -218,6 +272,7 @@ namespace MangadexDownloader.ContentCollecting
 
             // add ChapterInfo
             Paragraph chapterInfo = new Paragraph($"Chapter {page.ChapterNumber}");
+            chapterInfo.SetFont(font);
             chapterInfo.SetTextAlignment(TextAlignment.CENTER);
             chapterInfo.SetFontSize(chapterFontSize);
 
@@ -225,7 +280,9 @@ namespace MangadexDownloader.ContentCollecting
 
             // document to next
             document.Add(new AreaBreak());
-
+#if DEBUG
+            Trace.WriteLine($"{DateTime.Now}: new page content info has created, pageIndex: {pageIndex}");
+#endif
         }
 
         private void AddPageWithImageShape(PageInfo page, int pageIndex) 
@@ -289,5 +346,7 @@ namespace MangadexDownloader.ContentCollecting
             }
             return pages;
         }
+
+        
     }
 }
