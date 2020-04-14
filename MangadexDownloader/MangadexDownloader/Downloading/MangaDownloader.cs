@@ -16,6 +16,21 @@ namespace MangadexDownloader.Downloading
     public class MangaDownloader : IMangaDownloader
     {
         /// <summary>
+        /// on progress event
+        /// </summary>
+        public event OnProgressParserEventHandler OnProgress 
+        {
+            add 
+            {
+                MangaParser.OnProgress += value;
+            }
+            remove 
+            {
+                MangaParser.OnProgress -= value;
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="id">manga's id</param>

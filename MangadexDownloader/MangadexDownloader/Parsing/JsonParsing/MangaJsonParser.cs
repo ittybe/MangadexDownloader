@@ -64,7 +64,7 @@ namespace MangadexDownloader.Parsing.JsonParsing
         {
             MangaInfo mangaInfo = JsonConvert.DeserializeObject<MangaInfo>(json);
             if (mangaInfo.ShortChaptersInfo.Count < 1)
-                throw new ApplicationException($"MangaInfo json is invalid");
+                throw new ApplicationException($"MangaInfo json is invalid or manga has no chapters to parse");
             return mangaInfo;
         }
         /// <summary>

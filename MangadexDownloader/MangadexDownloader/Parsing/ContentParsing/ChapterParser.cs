@@ -9,8 +9,15 @@ using System.Threading;
 
 namespace MangadexDownloader.Parsing.ContentParsing
 {
+    
+
     public class ChapterParser : IChapterParser
     {
+        /// <summary>
+        /// how many pages parsed
+        /// </summary>
+        public OnProgressParserEventHandler OnProgress { get; set; }
+
         /// <summary>
         /// pattern to file naming
         /// this struct of name
@@ -32,6 +39,8 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time</param>
         public void Parse(IChapterInfo chapterInfo, int numberOfTry)
         {
+            int numberOfPages = chapterInfo.Pages.Count;
+            int parsedPages = 0;
             foreach (var page in chapterInfo.Pages) 
             {
                 string pageUrl = $"{chapterInfo.ServerUrl}/{chapterInfo.Hash}/{page.PageName}";
@@ -43,6 +52,10 @@ namespace MangadexDownloader.Parsing.ContentParsing
                     try
                     {
                         ParsePage(page, chapterInfo);
+                        // call delagate 
+                        string message = $"{DateTime.Now}: page \"{pageUrl}\" has parsed successfully, page number {page.PageNumber}, chapter number: {chapterInfo.Chapter}, volume number: {chapterInfo.Volume}, chapter id: {chapterInfo.Id}";
+                        var e = new OnProgressParserEventArgs() {NumberOfPages = numberOfPages, ParsedPages = ++parsedPages, Message = message};
+                        OnProgress?.Invoke(this, e);
 #if DEBUG
                         Trace.WriteLine($"{DateTime.Now}: page \"{pageUrl}\" has parsed successfully, page number {page.PageNumber}, chapter number: {chapterInfo.Chapter}, volume number: {chapterInfo.Volume}, chapter id: {chapterInfo.Id}");
 #endif

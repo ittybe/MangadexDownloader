@@ -15,6 +15,11 @@ namespace MangadexDownloader.Downloading
     public interface IMangaDownloader
     {
         /// <summary>
+        /// event on progress
+        /// </summary>
+        event OnProgressParserEventHandler OnProgress;
+
+        /// <summary>
         /// Temp Dir for pages
         /// </summary>
         DirectoryInfo Dir { get; set; }

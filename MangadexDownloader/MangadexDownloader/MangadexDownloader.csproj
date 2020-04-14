@@ -7,11 +7,14 @@
     <RepositoryUrl>https://github.com/ittybe/MangadexDownloader</RepositoryUrl>
     <RepositoryType>Donwloading</RepositoryType>
     <PackageTags>Manga Api Download</PackageTags>
-    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <PackageReleaseNotes>fix mangaInfo title and coverUrl deserializing</PackageReleaseNotes>
     <Authors>ittybe</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright />
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

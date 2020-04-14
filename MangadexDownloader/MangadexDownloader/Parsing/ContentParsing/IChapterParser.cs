@@ -11,6 +11,10 @@ namespace MangadexDownloader.Parsing.ContentParsing
     public interface IChapterParser
     {
         /// <summary>
+        /// how many pages parsed
+        /// </summary>
+        OnProgressParserEventHandler OnProgress { get; set; }
+        /// <summary>
         /// dir for pages
         /// </summary>
         DirectoryInfo Dir { get; set; }

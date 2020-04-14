@@ -12,6 +12,10 @@ namespace MangadexDownloader.Parsing.ContentParsing
     public interface IMangaParser
     {
         /// <summary>
+        /// call when page parsed
+        /// </summary>
+        OnProgressParserEventHandler OnProgress { get; set; }
+        /// <summary>
         /// information about manga
         /// </summary>
         IMangaInfo MangaInfo { get; set; }

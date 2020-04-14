@@ -16,6 +16,24 @@ namespace MangadexDownloader.Parsing.ContentParsing
     /// </summary>
     public class MangaParser : IMangaParser
     {
+        private int NumberOfPages 
+        {
+            get 
+            {
+                int result = 0;
+                foreach (var chapter in ChaptersInfo)
+                {
+                    result += chapter.Pages.Count;
+                }
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// call when page parsed
+        /// </summary>
+        public OnProgressParserEventHandler OnProgress { get; set; }
+
         /// <summary>
         /// get directly mangainfo object
         /// </summary>
@@ -74,8 +92,17 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time, for chapter parser</param>
         protected void ParseChapters(int numberOfTry)
         {
-            IChapterParser chapterParser = new ChapterParser(Dir);
-
+            int parsedPages = 0;
+            ChapterParser chapterParser = new ChapterParser(Dir);
+            OnProgressParserEventHandler onProgressHandler = (sender, e) =>
+            {
+                // one call event is one parsed page
+                parsedPages++;
+                e.ParsedPages = parsedPages;
+                e.NumberOfPages = NumberOfPages;
+                OnProgress?.Invoke(this, e);
+            };
+            chapterParser.OnProgress += onProgressHandler;
             foreach (var chapter in ChaptersInfo)
             {
                 chapterParser.Parse(chapter, numberOfTry);

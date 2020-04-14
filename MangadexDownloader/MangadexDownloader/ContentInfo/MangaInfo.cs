@@ -6,6 +6,7 @@ using System.Text;
 
 namespace MangadexDownloader.ContentInfo
 {
+    // json converter to parse like this node1.node2
     [JsonConverter(typeof(JsonPathConverter))]
     public class MangaInfo : IMangaInfo
     {

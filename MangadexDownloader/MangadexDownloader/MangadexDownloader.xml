@@ -292,6 +292,11 @@
             interface for MangaDownloader
             </summary>
         </member>
+        <member name="E:MangadexDownloader.Downloading.IMangaDownloader.OnProgress">
+            <summary>
+            event on progress
+            </summary>
+        </member>
         <member name="P:MangadexDownloader.Downloading.IMangaDownloader.Dir">
             <summary>
             Temp Dir for pages
@@ -340,6 +345,11 @@
         <member name="T:MangadexDownloader.Downloading.MangaDownloader">
             <summary>
             Download manga and convert it to pdf
+            </summary>
+        </member>
+        <member name="E:MangadexDownloader.Downloading.MangaDownloader.OnProgress">
+            <summary>
+            on progress event
             </summary>
         </member>
         <member name="M:MangadexDownloader.Downloading.MangaDownloader.#ctor(System.Int32,System.IO.DirectoryInfo)">
@@ -406,6 +416,11 @@
             Generate name for directory and then Creates directory in system Temp dir
             </summary>
         </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.ChapterParser.OnProgress">
+            <summary>
+            how many pages parsed
+            </summary>
+        </member>
         <member name="F:MangadexDownloader.Parsing.ContentParsing.ChapterParser.Pattern">
             <summary>
             pattern to file naming
@@ -432,6 +447,11 @@
             interface for chapter parser
             </summary>
         </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.IChapterParser.OnProgress">
+            <summary>
+            how many pages parsed
+            </summary>
+        </member>
         <member name="P:MangadexDownloader.Parsing.ContentParsing.IChapterParser.Dir">
             <summary>
             dir for pages
@@ -447,6 +467,11 @@
         <member name="T:MangadexDownloader.Parsing.ContentParsing.IMangaParser">
             <summary>
             interface for MangaParser
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.IMangaParser.OnProgress">
+            <summary>
+            call when page parsed
             </summary>
         </member>
         <member name="P:MangadexDownloader.Parsing.ContentParsing.IMangaParser.MangaInfo">
@@ -476,6 +501,11 @@
         <member name="T:MangadexDownloader.Parsing.ContentParsing.MangaParser">
             <summary>
             parse chapter's pages into Dir
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.Parsing.ContentParsing.MangaParser.OnProgress">
+            <summary>
+            call when page parsed
             </summary>
         </member>
         <member name="M:MangadexDownloader.Parsing.ContentParsing.MangaParser.#ctor(MangadexDownloader.ContentInfo.IMangaInfo,System.IO.DirectoryInfo)">
@@ -532,6 +562,18 @@
             </summary>
             <param name="threadsNumber">how many threads is running at the same time</param>
             <param name="match">add ChapterInfo to list if ShortChapterInfo match</param>
+        </member>
+        <member name="T:MangadexDownloader.Parsing.ContentParsing.OnProgressParserEventArgs">
+            <summary>
+            on progress event args for delegate
+            </summary>
+        </member>
+        <member name="T:MangadexDownloader.Parsing.ContentParsing.OnProgressParserEventHandler">
+            <summary>
+            on progress 
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="M:MangadexDownloader.Parsing.JsonParsing.ChapterJsonParser.GetJson(System.Int32)">
             <summary>
