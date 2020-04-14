@@ -53,7 +53,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
                     {
                         ParsePage(page, chapterInfo);
                         // call delagate 
-                        string message = $"{DateTime.Now}: page \"{pageUrl}\" has parsed successfully, page number {page.PageNumber}, chapter number: {chapterInfo.Chapter}, volume number: {chapterInfo.Volume}, chapter id: {chapterInfo.Id}";
+                        string message = $"{DateTime.Now}: page \"{pageUrl}\" has parsed successfully into dir \"{Dir.FullName}\", page number {page.PageNumber}, chapter number: {chapterInfo.Chapter}, volume number: {chapterInfo.Volume}, chapter id: {chapterInfo.Id}";
                         var e = new OnProgressParserEventArgs() {NumberOfPages = numberOfPages, ParsedPages = ++parsedPages, Message = message};
                         OnProgress?.Invoke(this, e);
 #if DEBUG
