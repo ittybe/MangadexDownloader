@@ -11,13 +11,13 @@ namespace MangadexDownloader.ContentInfo
         /// <summary>
         /// manga's cover url
         /// </summary>
-        [JsonProperty("cover_url")]
+        [JsonProperty("manga.cover_url")]
         public string CoverUrl { get; set; }
         /// <summary>
         /// title of manga
         /// </summary>
         
-        [JsonProperty("title")]
+        [JsonProperty("manga.title")]
         public string Title { get; set; }
 
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>MangadexDownloader</id>
+    <version>1.0.0</version>
+    <authors>ittybe</authors>
+    <owners>ittybe</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/ittybe/MangadexDownloader</projectUrl>
+    <description>Download manga on different languages on site mandadex into PDF format</description>
+    <releaseNotes>First release</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <tags>Mangadex Api</tags>
+    <dependencies>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="SampleDependency" version="1.0.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

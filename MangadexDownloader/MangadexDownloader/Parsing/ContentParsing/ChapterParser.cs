@@ -1,6 +1,4 @@
-﻿using AngleSharp;
-using AngleSharp.Io;
-using MangadexDownloader.ContentInfo;
+﻿using MangadexDownloader.ContentInfo;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
