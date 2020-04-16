@@ -67,6 +67,10 @@ namespace MangadexDownloader.ContentCollecting
                 // ADD IMAGE PAGE
 
                 SetImageToPage(page);
+                
+                // save changes to avoid out of memory exception
+
+                document.Flush();
             }
             // save pdf file
             if (pdfDocument.GetNumberOfPages() > 0)
@@ -129,6 +133,10 @@ namespace MangadexDownloader.ContentCollecting
                 // ADD IMAGE PAGE
 
                 SetImageToPage(page);
+
+                // save changes to avoid out of memory exception
+
+                document.Flush();
             }
 
             // create link to every chapter begin content 
