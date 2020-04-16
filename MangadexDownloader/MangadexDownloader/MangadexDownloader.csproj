@@ -6,15 +6,15 @@
     <PackageProjectUrl>https://github.com/ittybe/MangadexDownloader</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ittybe/MangadexDownloader</RepositoryUrl>
     <RepositoryType>Donwloading</RepositoryType>
-    <PackageTags>Manga Api Download</PackageTags>
-    <PackageReleaseNotes>fix mangaInfo title and coverUrl deserializing</PackageReleaseNotes>
+    <PackageTags>Manga Api Download Pdf</PackageTags>
+    <PackageReleaseNotes>fix empty volume or chapter number (string type)</PackageReleaseNotes>
     <Authors>ittybe</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright />
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>1.0.0.2</AssemblyVersion>
-    <FileVersion>1.0.0.2</FileVersion>
-    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.0.3</AssemblyVersion>
+    <FileVersion>1.0.0.3</FileVersion>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

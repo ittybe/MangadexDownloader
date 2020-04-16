@@ -147,6 +147,16 @@
             <param name="other">other page</param>
             <returns>result</returns>
         </member>
+        <member name="P:MangadexDownloader.ContentInfo.ChapterInfo.Volume">
+            <summary>
+            volume number
+            </summary>
+        </member>
+        <member name="P:MangadexDownloader.ContentInfo.ChapterInfo.Chapter">
+            <summary>
+            chapter number
+            </summary>
+        </member>
         <member name="P:MangadexDownloader.ContentInfo.ChapterInfo.Pages">
             <summary>
             all pages

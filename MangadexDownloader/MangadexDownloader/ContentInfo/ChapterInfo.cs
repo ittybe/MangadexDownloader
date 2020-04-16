@@ -19,13 +19,40 @@ namespace MangadexDownloader.ContentInfo
         [JsonProperty("manga_id")]
         public int MangaId { get; set; }
 
-        
+
+        private string volume;
+        /// <summary>
+        /// volume number
+        /// </summary>
         [JsonProperty("volume")]
-        public string Volume { get; set; }
-        
-        
+        public string Volume
+        {
+            get { return volume; }
+            set
+            {
+                // for some fricking reason some chapters doesnt have volume!
+                if (value.CompareTo(string.Empty) == 0)
+                    value = "0";
+                volume = value;
+            }
+        }
+
+        private string chapter;
+        /// <summary>
+        /// chapter number
+        /// </summary>
         [JsonProperty("chapter")]
-        public string Chapter { get; set; }
+        public string Chapter
+        {
+            get { return chapter; }
+            set
+            {
+                // for some fricking reason some chapters doesnt have chapter!
+                if (value.CompareTo(string.Empty) == 0)
+                    value = "0";
+                chapter = value;
+            }
+        }
 
         private JArray pageArray;
 
