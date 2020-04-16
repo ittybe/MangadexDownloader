@@ -68,8 +68,9 @@ namespace MangadexDownloader.Parsing.JsonParsing
             
             // little bodge, somewhere some volumes doesn't have Chapter Number;
             if (chapterInfo.Chapter.CompareTo(string.Empty) == 0)
-                chapterInfo.Chapter = "1";
-            
+                chapterInfo.Chapter = "0";
+            if (chapterInfo.Volume.CompareTo(string.Empty) == 0)
+                chapterInfo.Volume = "0";
             return chapterInfo;
         }
         /// <summary>

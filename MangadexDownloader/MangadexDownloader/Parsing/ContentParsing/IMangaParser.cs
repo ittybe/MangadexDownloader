@@ -19,7 +19,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// information about manga
         /// </summary>
         IMangaInfo MangaInfo { get; set; }
-        
+
         /// <summary>
         /// dir for pages
         /// </summary>
@@ -32,7 +32,7 @@ namespace MangadexDownloader.Parsing.ContentParsing
         /// <param name="numberOfTry">number of try if while parsing something gone wrong it will try to parse this again this amount of time, for chapter parser</param>
 
         void Parse(Predicate<ShortChapterInfo> match, int numberOfTry);
-        
+
         /// <summary>
         /// parse chapter's info from manga
         /// </summary>
